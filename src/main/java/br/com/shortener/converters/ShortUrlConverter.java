@@ -1,7 +1,7 @@
 package br.com.shortener.converters;
 
-import br.com.shortener.domain.ShortUrl;
-import br.com.shortener.gateway.http.json.response.ShortUrlResponseJson;
+import br.com.shortener.domains.ShortUrl;
+import br.com.shortener.gateways.http.json.response.ShortUrlResponseJson;
 import org.springframework.stereotype.Component;
 
 @Component

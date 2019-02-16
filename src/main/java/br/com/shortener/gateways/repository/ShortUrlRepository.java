@@ -1,6 +1,6 @@
-package br.com.shortener.gateway.repository;
+package br.com.shortener.gateways.repository;
 
-import br.com.shortener.domain.ShortUrl;
+import br.com.shortener.domains.ShortUrl;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

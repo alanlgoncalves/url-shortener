@@ -1,4 +1,4 @@
-package br.com.shortener.usecase;
+package br.com.shortener.usecases;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;

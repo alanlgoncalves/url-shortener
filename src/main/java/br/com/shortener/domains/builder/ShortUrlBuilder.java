@@ -1,6 +1,6 @@
-package br.com.shortener.domain.builder;
+package br.com.shortener.domains.builder;
 
-import br.com.shortener.domain.ShortUrl;
+import br.com.shortener.domains.ShortUrl;
 
 public class ShortUrlBuilder {
   private String id;

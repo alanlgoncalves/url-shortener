@@ -1,4 +1,4 @@
-package br.com.shortener.gateway.http.json.request;
+package br.com.shortener.gateways.http.json.request;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;

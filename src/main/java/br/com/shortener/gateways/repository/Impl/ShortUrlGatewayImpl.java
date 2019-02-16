@@ -1,10 +1,12 @@
-package br.com.shortener.gateway.repository.Impl;
+package br.com.shortener.gateways.repository.Impl;
 
-import br.com.shortener.domain.ShortUrl;
-import br.com.shortener.gateway.ShortUrlGateway;
-import br.com.shortener.gateway.repository.ShortUrlRepository;
+import br.com.shortener.domains.ShortUrl;
+import br.com.shortener.gateways.ShortUrlGateway;
+import br.com.shortener.gateways.repository.ShortUrlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 public class ShortUrlGatewayImpl implements ShortUrlGateway {
@@ -14,6 +16,11 @@ public class ShortUrlGatewayImpl implements ShortUrlGateway {
   @Autowired
   public ShortUrlGatewayImpl(final ShortUrlRepository shortUrlRepository) {
     this.shortUrlRepository = shortUrlRepository;
+  }
+
+  @Override
+  public Optional<ShortUrl> get(String id) {
+    return shortUrlRepository.findById(id);
   }
 
   @Override

@@ -1,4 +1,4 @@
-package br.com.shortener.gateway.http.json.response;
+package br.com.shortener.gateways.http.json.response;
 
 public class ShortUrlResponseJson {
 

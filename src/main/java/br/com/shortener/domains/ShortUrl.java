@@ -1,4 +1,4 @@
-package br.com.shortener.domain;
+package br.com.shortener.domains;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
