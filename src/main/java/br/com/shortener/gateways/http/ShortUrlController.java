@@ -4,7 +4,7 @@ import br.com.shortener.converters.ShortUrlConverter;
 import br.com.shortener.domains.collections.ShortUrl;
 import br.com.shortener.gateways.http.json.request.ShortUrlRequestJson;
 import br.com.shortener.gateways.http.json.response.ShortUrlResponseJson;
-import br.com.shortener.usecases.RetrieveServerContext;
+import br.com.shortener.usecases.RetrieveServerUrlContext;
 import br.com.shortener.usecases.RetrieveShortUrl;
 import br.com.shortener.usecases.SaveShortUrl;
 import br.com.shortener.usecases.SaveShortUrlRequest;
@@ -28,7 +28,7 @@ public class ShortUrlController {
 
   private final RetrieveShortUrl retrieveShortUrl;
 
-  private final RetrieveServerContext retrieveServerContext;
+  private final RetrieveServerUrlContext retrieveServerUrlContext;
 
   @Autowired
   public ShortUrlController(
@@ -36,12 +36,12 @@ public class ShortUrlController {
       final ShortUrlConverter shortUrlConverter,
       final SaveShortUrlRequest saveShortUrlRequest,
       final RetrieveShortUrl retrieveShortUrl,
-      final RetrieveServerContext retrieveServerContext) {
+      final RetrieveServerUrlContext retrieveServerUrlContext) {
     this.saveShortUrl = saveShortUrl;
     this.shortUrlConverter = shortUrlConverter;
     this.saveShortUrlRequest = saveShortUrlRequest;
     this.retrieveShortUrl = retrieveShortUrl;
-    this.retrieveServerContext = retrieveServerContext;
+    this.retrieveServerUrlContext = retrieveServerUrlContext;
   }
 
   @GetMapping(value = "short/{shortUrlId}")
@@ -66,6 +66,6 @@ public class ShortUrlController {
     final ShortUrl shortUrl = saveShortUrl.execute(shortUrlRequestJson.getUrl());
 
     return shortUrlConverter.convertToShortUrlResponseJson(
-        retrieveServerContext.execute(), shortUrl);
+        retrieveServerUrlContext.execute(), shortUrl);
   }
 }

@@ -17,6 +17,7 @@
     <properties>
         <java.version>1.8</java.version>
         <springfox.version>2.9.2</springfox.version>
+        <fixture.version>3.1.0</fixture.version>
     </properties>
 
     <dependencies>
@@ -48,6 +49,14 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>${springfox.version}</version>
+        </dependency>
+
+        <!-- Fixture -->
+        <dependency>
+            <groupId>br.com.six2six</groupId>
+            <artifactId>fixture-factory</artifactId>
+            <version>${fixture.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

@@ -19,6 +19,8 @@ public class ShortUrlRequest {
 
   private LocalDateTime requestDateTime;
 
+  public ShortUrlRequest() {}
+
   public ShortUrlRequest(
       final String id,
       final ShortUrl shortUrl,

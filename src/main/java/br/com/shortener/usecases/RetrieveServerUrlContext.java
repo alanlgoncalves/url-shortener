@@ -9,29 +9,29 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 @Service
-public class RetrieveServerContext {
+public class RetrieveServerUrlContext {
+
+  public static final String LOCALHOST_IP = "127.0.0.1";
 
   private final ApplicationContext applicationContext;
 
   @Autowired
-  public RetrieveServerContext(final ApplicationContext applicationContext) {
+  public RetrieveServerUrlContext(final ApplicationContext applicationContext) {
     this.applicationContext = applicationContext;
   }
 
   public String execute() {
-    String serverContext = "";
+    String serverContext;
+
+    final int port =
+        applicationContext.getBean(Environment.class).getProperty("server.port", Integer.class);
 
     try {
       final String ip = InetAddress.getLocalHost().getHostAddress();
 
-      final int port =
-          applicationContext
-              .getBean(Environment.class)
-              .getProperty("server.port", Integer.class, 8080);
-
       serverContext = String.format("%s:%s", ip, port);
     } catch (UnknownHostException e) {
-      e.printStackTrace();
+      serverContext = String.format("%s:%s", LOCALHOST_IP, port);
     }
 
     return serverContext;
