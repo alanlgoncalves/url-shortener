@@ -1,4 +1,4 @@
-package br.com.shortener.domains;
+package br.com.shortener.domains.collections;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,7 +10,7 @@ public class ShortUrl {
 
   private String url;
 
-  public ShortUrl(String id, String url) {
+  public ShortUrl(final String id, final String url) {
     this.id = id;
     this.url = url;
   }
@@ -19,7 +19,7 @@ public class ShortUrl {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(final String id) {
     this.id = id;
   }
 
@@ -27,7 +27,7 @@ public class ShortUrl {
     return url;
   }
 
-  public void setUrl(String url) {
+  public void setUrl(final String url) {
     this.url = url;
   }
 }

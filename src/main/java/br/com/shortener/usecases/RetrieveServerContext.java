@@ -11,7 +11,12 @@ import java.net.UnknownHostException;
 @Service
 public class RetrieveServerContext {
 
-  @Autowired private ApplicationContext applicationContext;
+  private final ApplicationContext applicationContext;
+
+  @Autowired
+  public RetrieveServerContext(final ApplicationContext applicationContext) {
+    this.applicationContext = applicationContext;
+  }
 
   public String execute() {
     String serverContext = "";
@@ -24,7 +29,7 @@ public class RetrieveServerContext {
               .getBean(Environment.class)
               .getProperty("server.port", Integer.class, 8080);
 
-      serverContext = String.format("%s:%s", ip,  port);
+      serverContext = String.format("%s:%s", ip, port);
     } catch (UnknownHostException e) {
       e.printStackTrace();
     }

@@ -15,7 +15,7 @@ public class ShortUrlRequestJson {
     return url;
   }
 
-  public void setUrl(String url) {
+  public void setUrl(final String url) {
     this.url = url;
   }
 }

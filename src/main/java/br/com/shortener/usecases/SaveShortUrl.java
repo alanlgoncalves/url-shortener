@@ -1,7 +1,7 @@
 package br.com.shortener.usecases;
 
-import br.com.shortener.domains.ShortUrl;
-import br.com.shortener.domains.builder.ShortUrlBuilder;
+import br.com.shortener.domains.builders.ShortUrlBuilder;
+import br.com.shortener.domains.collections.ShortUrl;
 import br.com.shortener.gateways.ShortUrlGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

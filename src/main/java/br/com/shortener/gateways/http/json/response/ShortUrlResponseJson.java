@@ -4,7 +4,7 @@ public class ShortUrlResponseJson {
 
   private String shortUrl;
 
-  public ShortUrlResponseJson(String url) {
+  public ShortUrlResponseJson(final String url) {
     this.shortUrl = url;
   }
 
@@ -12,7 +12,7 @@ public class ShortUrlResponseJson {
     return shortUrl;
   }
 
-  public void setShortUrl(String shortUrl) {
+  public void setShortUrl(final String shortUrl) {
     this.shortUrl = shortUrl;
   }
 }

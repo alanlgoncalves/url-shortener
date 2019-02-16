@@ -1,17 +1,17 @@
-package br.com.shortener.domains.builder;
+package br.com.shortener.domains.builders;
 
-import br.com.shortener.domains.ShortUrl;
+import br.com.shortener.domains.collections.ShortUrl;
 
 public class ShortUrlBuilder {
   private String id;
   private String url;
 
-  public ShortUrlBuilder setId(String id) {
+  public ShortUrlBuilder setId(final String id) {
     this.id = id;
     return this;
   }
 
-  public ShortUrlBuilder setUrl(String url) {
+  public ShortUrlBuilder setUrl(final String url) {
     this.url = url;
     return this;
   }

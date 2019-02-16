@@ -1,18 +1,20 @@
 package br.com.shortener.gateways.http;
 
 import br.com.shortener.converters.ShortUrlConverter;
-import br.com.shortener.domains.ShortUrl;
+import br.com.shortener.domains.collections.ShortUrl;
 import br.com.shortener.gateways.http.json.request.ShortUrlRequestJson;
 import br.com.shortener.gateways.http.json.response.ShortUrlResponseJson;
 import br.com.shortener.usecases.RetrieveServerContext;
 import br.com.shortener.usecases.RetrieveShortUrl;
 import br.com.shortener.usecases.SaveShortUrl;
+import br.com.shortener.usecases.SaveShortUrlRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -22,6 +24,8 @@ public class ShortUrlController {
 
   private final ShortUrlConverter shortUrlConverter;
 
+  private final SaveShortUrlRequest saveShortUrlRequest;
+
   private final RetrieveShortUrl retrieveShortUrl;
 
   private final RetrieveServerContext retrieveServerContext;
@@ -30,19 +34,23 @@ public class ShortUrlController {
   public ShortUrlController(
       final SaveShortUrl saveShortUrl,
       final ShortUrlConverter shortUrlConverter,
+      final SaveShortUrlRequest saveShortUrlRequest,
       final RetrieveShortUrl retrieveShortUrl,
       final RetrieveServerContext retrieveServerContext) {
     this.saveShortUrl = saveShortUrl;
     this.shortUrlConverter = shortUrlConverter;
+    this.saveShortUrlRequest = saveShortUrlRequest;
     this.retrieveShortUrl = retrieveShortUrl;
     this.retrieveServerContext = retrieveServerContext;
   }
 
   @GetMapping(value = "short/{shortUrlId}")
   public ModelAndView redirectWithUsingRedirectPrefix(
-      @PathVariable("shortUrlId") final String shortUrlId) {
+      @PathVariable("shortUrlId") final String shortUrlId, HttpServletRequest request) {
 
-    ShortUrl shortUrl = retrieveShortUrl.execute(shortUrlId);
+    final ShortUrl shortUrl = retrieveShortUrl.execute(shortUrlId);
+
+    saveShortUrlRequest.execute(shortUrl, request.getRemoteAddr());
 
     return new ModelAndView(String.format("redirect:%s", shortUrl.getUrl()));
   }
@@ -55,7 +63,7 @@ public class ShortUrlController {
   public ShortUrlResponseJson shortenURL(
       @Valid @RequestBody final ShortUrlRequestJson shortUrlRequestJson) {
 
-    ShortUrl shortUrl = saveShortUrl.execute(shortUrlRequestJson.getUrl());
+    final ShortUrl shortUrl = saveShortUrl.execute(shortUrlRequestJson.getUrl());
 
     return shortUrlConverter.convertToShortUrlResponseJson(
         retrieveServerContext.execute(), shortUrl);

@@ -2,7 +2,7 @@ package br.com.shortener.gateways.http.json.response;
 
 public class ErrorResponseJson {
 
-  public ErrorResponseJson(String message) {
+  public ErrorResponseJson(final String message) {
     this.message = message;
   }
 
@@ -10,7 +10,7 @@ public class ErrorResponseJson {
     return message;
   }
 
-  public void setMessage(String message) {
+  public void setMessage(final String message) {
     this.message = message;
   }
 

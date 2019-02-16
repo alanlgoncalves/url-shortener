@@ -1,6 +1,6 @@
 package br.com.shortener.usecases;
 
-import br.com.shortener.domains.ShortUrl;
+import br.com.shortener.domains.collections.ShortUrl;
 import br.com.shortener.exceptions.RecordNotFoundException;
 import br.com.shortener.gateways.ShortUrlGateway;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +14,12 @@ public class RetrieveShortUrl {
   private final ShortUrlGateway shortUrlGateway;
 
   @Autowired
-  public RetrieveShortUrl(ShortUrlGateway shortUrlGateway) {
+  public RetrieveShortUrl(final ShortUrlGateway shortUrlGateway) {
     this.shortUrlGateway = shortUrlGateway;
   }
 
   public ShortUrl execute(final String shortUrlId) {
-    Optional<ShortUrl> shortUrlOptional = shortUrlGateway.get(shortUrlId);
+    final Optional<ShortUrl> shortUrlOptional = shortUrlGateway.get(shortUrlId);
 
     if (!shortUrlOptional.isPresent()) {
       throw new RecordNotFoundException("Short URL not found");
