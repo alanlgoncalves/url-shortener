@@ -16,6 +16,8 @@ public class ShortUrlStatisticsResponseJson {
 
   private List<ShortUrlRequestResponseJson> lastTenRequests;
 
+  public ShortUrlStatisticsResponseJson() {}
+
   public ShortUrlStatisticsResponseJson(
       final ShortUrl shortUrl,
       final long numberOfRequests,

@@ -4,6 +4,8 @@ public class ShortUrlResponseJson {
 
   private String shortUrl;
 
+  public ShortUrlResponseJson() {}
+
   public ShortUrlResponseJson(final String url) {
     this.shortUrl = url;
   }

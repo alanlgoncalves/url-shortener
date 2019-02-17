@@ -9,6 +9,7 @@ import br.com.shortener.usecases.RetrieveShortUrl;
 import br.com.shortener.usecases.SaveShortUrl;
 import br.com.shortener.usecases.SaveShortUrlRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -56,6 +57,7 @@ public class ShortUrlController {
   }
 
   @ResponseBody
+  @ResponseStatus(HttpStatus.CREATED)
   @PostMapping(
       value = "short",
       consumes = MediaType.APPLICATION_JSON_VALUE,

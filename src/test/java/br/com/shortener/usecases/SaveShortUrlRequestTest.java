@@ -6,7 +6,7 @@ import br.com.shortener.gateways.ShortUrlRequestGateway;
 import br.com.shortener.templates.Templates;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -24,8 +24,8 @@ public class SaveShortUrlRequestTest {
 
   @Mock private ShortUrlRequestGateway shortUrlRequestGateway;
 
-  @Before
-  public void setUp() {
+  @BeforeClass
+  public static void beforeClass() {
     FixtureFactoryLoader.loadTemplates(Templates.TEMPLATES_PACKAGE);
   }
 

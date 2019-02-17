@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 @RestController
 public class ShortUrlStatisticsController {
@@ -40,10 +40,10 @@ public class ShortUrlStatisticsController {
 
   private String getShortUrlId(final String shortUrl) {
     try {
-      URI uri = new URI(shortUrl);
-      String path = uri.getPath();
+      URL url = new URL(shortUrl);
+      String path = url.getPath();
       return path.substring(path.lastIndexOf('/') + 1);
-    } catch (URISyntaxException e) {
+    } catch (MalformedURLException e) {
       throw new InvalidUrlException(String.format("The URI %s is not valid", shortUrl));
     }
   }

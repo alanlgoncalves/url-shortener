@@ -19,6 +19,7 @@
         <springfox.version>2.9.2</springfox.version>
         <junit.jupter>5.3.2</junit.jupter>
         <fixture.version>3.1.0</fixture.version>
+        <jsonpath.version>2.4.0</jsonpath.version>
     </properties>
 
     <dependencies>
@@ -76,6 +77,14 @@
             <version>${fixture.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path-assert</artifactId>
+            <version>${jsonpath.version}</version>
+            <scope>test</scope>
+        </dependency>
+
 
     </dependencies>
 
