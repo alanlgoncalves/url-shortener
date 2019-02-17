@@ -87,7 +87,7 @@ public class ShortUrlStatisticsControllerTest {
     assertThat(mvcResult.getResponse().getContentAsString(), hasJsonPath("$.numberOfRequests"));
     assertThat(mvcResult.getResponse().getContentAsString(), hasJsonPath("$.shortUrl"));
     assertThat(mvcResult.getResponse().getContentAsString(), hasJsonPath("$.lastRequest"));
-    assertThat(mvcResult.getResponse().getContentAsString(), hasJsonPath("$.lastTenRequests"));
+    assertThat(mvcResult.getResponse().getContentAsString(), hasJsonPath("$.lastRequests"));
     assertThat(
         mvcResult.getResponse().getContentAsString(),
         hasJsonPath("$.numberOfRequests", equalTo(10)));

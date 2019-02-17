@@ -14,7 +14,7 @@ public class ShortUrlStatisticsResponseJson {
 
   private ShortUrlRequestResponseJson lastRequest;
 
-  private List<ShortUrlRequestResponseJson> lastTenRequests;
+  private List<ShortUrlRequestResponseJson> lastRequests;
 
   public ShortUrlStatisticsResponseJson() {}
 
@@ -22,11 +22,11 @@ public class ShortUrlStatisticsResponseJson {
       final ShortUrl shortUrl,
       final long numberOfRequests,
       final ShortUrlRequestResponseJson lastRequest,
-      final List<ShortUrlRequestResponseJson> lastTenRequests) {
+      final List<ShortUrlRequestResponseJson> lastRequests) {
     this.shortUrl = shortUrl;
     this.numberOfRequests = numberOfRequests;
     this.lastRequest = lastRequest;
-    this.lastTenRequests = lastTenRequests;
+    this.lastRequests = lastRequests;
   }
 
   public ShortUrl getShortUrl() {
@@ -53,11 +53,11 @@ public class ShortUrlStatisticsResponseJson {
     this.lastRequest = lastRequest;
   }
 
-  public List<ShortUrlRequestResponseJson> getLastTenRequests() {
-    return lastTenRequests;
+  public List<ShortUrlRequestResponseJson> getLastRequests() {
+    return lastRequests;
   }
 
-  public void setLastTenRequests(final List<ShortUrlRequestResponseJson> lastTenRequests) {
-    this.lastTenRequests = lastTenRequests;
+  public void setLastRequests(final List<ShortUrlRequestResponseJson> lastRequests) {
+    this.lastRequests = lastRequests;
   }
 }

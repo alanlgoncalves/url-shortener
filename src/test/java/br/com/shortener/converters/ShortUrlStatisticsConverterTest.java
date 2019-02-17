@@ -50,7 +50,7 @@ class ShortUrlStatisticsConverterTest {
         .isEqualTo(lastRequest);
     assertThat(shortUrlStatisticsResponseJson.getNumberOfRequests())
         .isEqualTo(shortUrlStatistics.getNumberOfRequests());
-    assertThat(shortUrlStatisticsResponseJson.getLastTenRequests().size())
+    assertThat(shortUrlStatisticsResponseJson.getLastRequests().size())
         .isEqualTo(shortUrlStatistics.getLastTenRequests().size());
   }
 }

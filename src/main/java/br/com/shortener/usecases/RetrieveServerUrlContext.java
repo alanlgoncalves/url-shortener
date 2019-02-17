@@ -1,39 +1,39 @@
 package br.com.shortener.usecases;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.UnknownHostException;
 
 @Service
 public class RetrieveServerUrlContext {
 
-  public static final String LOCALHOST_IP = "127.0.0.1";
-
-  private final ApplicationContext applicationContext;
+  private Environment environment;
 
   @Autowired
-  public RetrieveServerUrlContext(final ApplicationContext applicationContext) {
-    this.applicationContext = applicationContext;
+  public RetrieveServerUrlContext(Environment environment) {
+    this.environment = environment;
   }
 
-  public String execute() {
-    String serverContext;
+  public String execute(String protocol) {
+    URL shortUrl = null;
 
-    final int port =
-        applicationContext.getBean(Environment.class).getProperty("server.port", Integer.class);
+    final int port = Integer.valueOf(environment.getProperty("server.port"));
 
     try {
-      final String ip = InetAddress.getLocalHost().getHostAddress();
+      final String hostAddress = InetAddress.getLocalHost().getHostAddress();
 
-      serverContext = String.format("%s:%s", ip, port);
+      shortUrl = new URL(protocol, hostAddress, port, "");
     } catch (UnknownHostException e) {
-      serverContext = String.format("%s:%s", LOCALHOST_IP, port);
+      e.printStackTrace();
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
     }
 
-    return serverContext;
+    return String.valueOf(shortUrl);
   }
 }

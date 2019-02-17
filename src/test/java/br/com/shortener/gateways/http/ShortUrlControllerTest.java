@@ -103,7 +103,7 @@ public class ShortUrlControllerTest {
 
     // WHEN
     when(saveShortUrl.execute(anyString())).thenReturn(shortUrl);
-    when(retrieveServerUrlContext.execute()).thenReturn(serverContext);
+    when(retrieveServerUrlContext.execute(anyString())).thenReturn(serverContext);
     when(shortUrlConverter.convertToShortUrlResponseJson(anyString(), any(ShortUrl.class)))
         .thenReturn(shortUrlResponseJson);
 

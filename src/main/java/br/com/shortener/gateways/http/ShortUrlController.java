@@ -63,11 +63,12 @@ public class ShortUrlController {
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ShortUrlResponseJson shortenURL(
-      @Valid @RequestBody final ShortUrlRequestJson shortUrlRequestJson) {
+      @Valid @RequestBody final ShortUrlRequestJson shortUrlRequestJson,
+      HttpServletRequest request) {
 
     final ShortUrl shortUrl = saveShortUrl.execute(shortUrlRequestJson.getUrl());
 
     return shortUrlConverter.convertToShortUrlResponseJson(
-        retrieveServerUrlContext.execute(), shortUrl);
+        retrieveServerUrlContext.execute(request.getScheme()), shortUrl);
   }
 }

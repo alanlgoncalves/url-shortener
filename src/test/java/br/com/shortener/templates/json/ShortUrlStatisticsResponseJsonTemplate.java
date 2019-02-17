@@ -25,7 +25,7 @@ public class ShortUrlStatisticsResponseJsonTemplate implements TemplateLoader {
                         ShortUrlRequestResponseJson.class,
                         Templates.SHORT_URL_REQUEST_RESPONSE_JSON));
                 add(
-                    "lastTenRequests",
+                    "lastRequests",
                     has(10)
                         .of(
                             ShortUrlRequestResponseJson.class,
