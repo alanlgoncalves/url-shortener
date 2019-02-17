@@ -95,7 +95,7 @@ public class ShortUrlControllerTest {
 
     // WHEN
     when(saveShortUrl.execute(anyString())).thenReturn(shortUrl);
-    when(shortUrlConverter.convertToShortUrlResponseJson(any(ShortUrl.class)))
+    when(shortUrlConverter.convertToShortUrlResponseJson(anyString(), any(ShortUrl.class)))
         .thenReturn(shortUrlResponseJson);
 
     final MvcResult mvcResult =

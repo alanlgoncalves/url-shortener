@@ -18,4 +18,9 @@ public class ShortUrlRequestJson {
   public void setUrl(final String url) {
     this.url = url;
   }
+
+  @Override
+  public String toString() {
+    return "ShortUrlRequestJson{" + "url='" + url + '\'' + '}';
+  }
 }

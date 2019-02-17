@@ -7,6 +7,8 @@ import br.com.shortener.gateways.http.json.response.ShortUrlResponseJson;
 import br.com.shortener.usecases.RetrieveShortUrl;
 import br.com.shortener.usecases.SaveShortUrl;
 import br.com.shortener.usecases.SaveShortUrlRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,6 +21,8 @@ import javax.validation.Valid;
 
 @Controller
 public class ShortUrlController {
+
+  Logger log = LoggerFactory.getLogger(ShortUrlController.class);
 
   private final SaveShortUrl saveShortUrl;
 
@@ -44,6 +48,8 @@ public class ShortUrlController {
   public ModelAndView redirectWithUsingRedirectPrefix(
       @PathVariable("shortUrlId") final String shortUrlId, HttpServletRequest request) {
 
+    log.info("Request for Short URL: {}", shortUrlId);
+
     final ShortUrl shortUrl = retrieveShortUrl.execute(shortUrlId);
 
     saveShortUrlRequest.execute(shortUrl, request.getRemoteAddr());
@@ -58,10 +64,13 @@ public class ShortUrlController {
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ShortUrlResponseJson shortenURL(
-      @Valid @RequestBody final ShortUrlRequestJson shortUrlRequestJson) {
+      @Valid @RequestBody final ShortUrlRequestJson shortUrlRequestJson,
+      final HttpServletRequest request) {
+
+    log.info("Request for create Short URL: {}", shortUrlRequestJson);
 
     final ShortUrl shortUrl = saveShortUrl.execute(shortUrlRequestJson.getUrl());
 
-    return shortUrlConverter.convertToShortUrlResponseJson(shortUrl);
+    return shortUrlConverter.convertToShortUrlResponseJson(request.getScheme(), shortUrl);
   }
 }

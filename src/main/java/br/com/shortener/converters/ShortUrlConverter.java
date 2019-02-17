@@ -18,12 +18,14 @@ public class ShortUrlConverter {
     this.environment = environment;
   }
 
-  public ShortUrlResponseJson convertToShortUrlResponseJson(final ShortUrl shortUrl) {
+  public ShortUrlResponseJson convertToShortUrlResponseJson(
+      final String protocol, final ShortUrl shortUrl) {
 
-    String serverAddress = environment.getProperty("server.dns");
+    String serverAddress = environment.getProperty("server.host");
 
     final String url =
-        String.format("%s/%s/%s", serverAddress, SHORT_PATH_CONTEXT, shortUrl.getId());
+        String.format(
+            "%s://%s/%s/%s", protocol, serverAddress, SHORT_PATH_CONTEXT, shortUrl.getId());
 
     return new ShortUrlResponseJson(url);
   }

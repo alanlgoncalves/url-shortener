@@ -1,25 +1,23 @@
 version: '3'
 services:
-  docker-app:
+  app:
     build:
       context: .
       dockerfile: Dockerfile
     image: alanlgoncalves/url-shortener-app:latest
-    container_name: url-shortener-app
     environment:
       - "SPRING_PROFILES_ACTIVE=local"
-    ports:
-      - "8080:8080"
+    expose:
+      - "5000"
     networks:
       - url-shortener-network
     depends_on:
-      - docker-mongodb
-  docker-mongodb:
+      - mongodb
+  mongodb:
     image: mongo:latest
-    container_name: url-shortener-mongodb
     restart: always
     ports:
-      - "27017:27017"
+      - "27017"
     networks:
       - url-shortener-network
     environment:
@@ -28,6 +26,16 @@ services:
       - MONGO_INITDB_DATABASE=dbShortener
     volumes:
       - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app
+    ports:
+      - "8080:8080"
+    networks:
+      - url-shortener-network
 networks:
   url-shortener-network:
     driver: bridge

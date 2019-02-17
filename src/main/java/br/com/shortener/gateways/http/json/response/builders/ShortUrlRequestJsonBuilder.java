@@ -19,6 +19,6 @@ public class ShortUrlRequestJsonBuilder {
   }
 
   public ShortUrlRequestResponseJson createShortUrlRequestJson() {
-    return new ShortUrlRequestResponseJson(requestIp, requestDateTime);
+    return new ShortUrlRequestResponseJson(requestDateTime);
   }
 }

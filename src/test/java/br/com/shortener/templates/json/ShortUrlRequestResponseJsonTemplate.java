@@ -17,7 +17,6 @@ public class ShortUrlRequestResponseJsonTemplate implements TemplateLoader {
             Templates.SHORT_URL_REQUEST_RESPONSE_JSON,
             new Rule() {
               {
-                add("requestIp", "127.0.0.1");
                 add("requestDateTime", LocalDateTime.now());
               }
             });

@@ -11,7 +11,6 @@ public class ShortUrlRequestConverter {
   public ShortUrlRequestResponseJson convertToShortUrlResponseJson(
       final ShortUrlRequest shortUrlRequest) {
     return new ShortUrlRequestJsonBuilder()
-        .setRequestIp(shortUrlRequest.getRequestIp())
         .setRequestDateTime(shortUrlRequest.getRequestDateTime())
         .createShortUrlRequestJson();
   }

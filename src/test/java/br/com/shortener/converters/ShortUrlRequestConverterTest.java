@@ -36,8 +36,6 @@ class ShortUrlRequestConverterTest {
         shortUrlRequestConverter.convertToShortUrlResponseJson(shortUrlRequest);
 
     // THEN
-    assertThat(shortUrlRequestResponseJson.getRequestIp())
-        .isEqualTo(shortUrlRequest.getRequestIp());
     assertThat(shortUrlRequestResponseJson.getRequestDateTime())
         .isEqualTo(shortUrlRequest.getRequestDateTime());
   }
