@@ -4,7 +4,6 @@ import br.com.shortener.converters.ShortUrlConverter;
 import br.com.shortener.domains.collections.ShortUrl;
 import br.com.shortener.gateways.http.json.response.ShortUrlResponseJson;
 import br.com.shortener.templates.Templates;
-import br.com.shortener.usecases.RetrieveServerUrlContext;
 import br.com.shortener.usecases.RetrieveShortUrl;
 import br.com.shortener.usecases.SaveShortUrl;
 import br.com.shortener.usecases.SaveShortUrlRequest;
@@ -49,9 +48,6 @@ public class ShortUrlControllerTest {
   @Mock private SaveShortUrlRequest saveShortUrlRequest;
 
   @Mock private RetrieveShortUrl retrieveShortUrl;
-
-  @Mock private RetrieveServerUrlContext retrieveServerUrlContext;
-
   private MockMvc mockMvc;
 
   @BeforeClass
@@ -65,11 +61,7 @@ public class ShortUrlControllerTest {
 
     shortUrlController =
         new ShortUrlController(
-            saveShortUrl,
-            shortUrlConverter,
-            saveShortUrlRequest,
-            retrieveShortUrl,
-            retrieveServerUrlContext);
+            saveShortUrl, shortUrlConverter, saveShortUrlRequest, retrieveShortUrl);
 
     mockMvc =
         MockMvcBuilders.standaloneSetup(shortUrlController)
@@ -103,8 +95,7 @@ public class ShortUrlControllerTest {
 
     // WHEN
     when(saveShortUrl.execute(anyString())).thenReturn(shortUrl);
-    when(retrieveServerUrlContext.execute(anyString())).thenReturn(serverContext);
-    when(shortUrlConverter.convertToShortUrlResponseJson(anyString(), any(ShortUrl.class)))
+    when(shortUrlConverter.convertToShortUrlResponseJson(any(ShortUrl.class)))
         .thenReturn(shortUrlResponseJson);
 
     final MvcResult mvcResult =

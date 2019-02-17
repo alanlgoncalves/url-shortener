@@ -1,0 +1,13 @@
+server:
+  port: 8080
+  dns: http://127.0.0.1:${server.port}
+
+spring:
+  data:
+    mongodb:
+      host: url-shortener-mongodb
+      port: 27017
+      database: dbShortener
+      username: shortener_rw
+      password: 7QZjSNbg0cor
+

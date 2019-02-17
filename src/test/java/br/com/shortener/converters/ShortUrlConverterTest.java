@@ -32,7 +32,7 @@ class ShortUrlConverterTest {
 
     // WHEN
     ShortUrlResponseJson shortUrlResponseJson =
-        shortUrlConverterl.convertToShortUrlResponseJson("127.0.0.1", shortUrl);
+        shortUrlConverterl.convertToShortUrlResponseJson(shortUrl);
 
     // THEN
     assertThat(shortUrlResponseJson.getShortUrl()).isEqualTo(shortUrlResponseJson.getShortUrl());
