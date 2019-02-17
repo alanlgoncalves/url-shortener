@@ -1,0 +1,14 @@
+server:
+  port: 5000
+  host: 135.188.195.173
+  default-protocol: http
+
+spring:
+  data:
+    mongodb:
+      host: mongodb
+      port: 27017
+      database: dbShortener
+      username: shortener_rw
+      password: 7QZjSNbg0cor
+
