@@ -1,11 +1,12 @@
 server:
-  port: 8080
-  dns: http://127.0.0.1:${server.port}
+  port: 5000
+  host: 127.0.0.1:8080
+  default-protocol: http
 
 spring:
   data:
     mongodb:
-      host: url-shortener-mongodb
+      host: mongodb
       port: 27017
       database: dbShortener
       username: shortener_rw
