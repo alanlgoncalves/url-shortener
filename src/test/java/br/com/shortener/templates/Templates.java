@@ -6,5 +6,7 @@ public class Templates {
 
   // DOMAINS
   public static final String SHORT_URL = "SHORT-URL";
-  public static final String SHORT_URL_REQUEST = "SHORT-URL-REQUEST";
+  public static final String SHORT_URL_REQUEST_1 = "SHORT-URL-REQUEST-1";
+  public static final String SHORT_URL_REQUEST_2 = "SHORT-URL-REQUEST-2";
+  public static final String SHORT_URL_STATISTICS = "SHORT-URL-STATISTIC";
 }

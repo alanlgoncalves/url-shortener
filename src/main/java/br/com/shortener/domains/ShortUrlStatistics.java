@@ -13,6 +13,8 @@ public class ShortUrlStatistics {
 
   private List<ShortUrlRequest> lastTenRequests;
 
+  public ShortUrlStatistics() {}
+
   public ShortUrlStatistics(
       final ShortUrl shortUrl,
       final long numberOfRequests,

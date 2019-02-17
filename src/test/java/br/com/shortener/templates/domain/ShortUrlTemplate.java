@@ -15,6 +15,7 @@ public class ShortUrlTemplate implements TemplateLoader {
             Templates.SHORT_URL,
             new Rule() {
               {
+                add("id", "5c685e51196c620f5a860fa9");
                 add("url", "https://www.google.com.br");
               }
             });

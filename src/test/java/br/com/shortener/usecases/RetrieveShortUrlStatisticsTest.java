@@ -45,7 +45,7 @@ public class RetrieveShortUrlStatisticsTest {
     final ShortUrl shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
     final long numberOfRequests = 10l;
     final List<ShortUrlRequest> shortUrlRequestList =
-        Fixture.from(ShortUrlRequest.class).gimme(10, Templates.SHORT_URL_REQUEST);
+        Fixture.from(ShortUrlRequest.class).gimme(10, Templates.SHORT_URL_REQUEST_1);
 
     // WHEN
     when(shortUrlGateway.get(eq(shortUrlId))).thenReturn(Optional.of(shortUrl));

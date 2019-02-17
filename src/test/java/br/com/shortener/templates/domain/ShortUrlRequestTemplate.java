@@ -15,12 +15,23 @@ public class ShortUrlRequestTemplate implements TemplateLoader {
   public void load() {
     Fixture.of(ShortUrlRequest.class)
         .addTemplate(
-            Templates.SHORT_URL_REQUEST,
+            Templates.SHORT_URL_REQUEST_1,
             new Rule() {
               {
                 add("shortUrl", one(ShortUrl.class, Templates.SHORT_URL));
                 add("requestIp", "127.0.0.1");
-                add("requestDateTime", LocalDateTime.now());
+                add("requestDateTime", LocalDateTime.of(2019, 1, 1, 10, 0));
+              }
+            });
+
+    Fixture.of(ShortUrlRequest.class)
+        .addTemplate(
+            Templates.SHORT_URL_REQUEST_2,
+            new Rule() {
+              {
+                add("shortUrl", one(ShortUrl.class, Templates.SHORT_URL));
+                add("requestIp", "127.0.0.1");
+                add("requestDateTime", LocalDateTime.of(2019, 1, 3, 10, 0));
               }
             });
   }
