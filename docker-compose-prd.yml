@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     image: alanlgoncalves/url-shortener-app:latest
     environment:
-      - "SPRING_PROFILES_ACTIVE=local"
+      - "SPRING_PROFILES_ACTIVE=prd"
     expose:
       - "5000"
     networks:
