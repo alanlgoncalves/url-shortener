@@ -29,11 +29,11 @@ services:
   nginx:
     image: nginx:latest
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx-local.conf:/etc/nginx/nginx.conf
     depends_on:
       - app
     ports:
-      - "8080:8080"
+      - "443:443"
     networks:
       - url-shortener-network
 networks:
