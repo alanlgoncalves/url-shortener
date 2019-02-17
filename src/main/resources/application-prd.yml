@@ -1,6 +1,6 @@
 server:
   port: 5000
-  host: 35.206.68.8:8080
+  host: 35.198.6.215:8080
   default-protocol: http
 
 spring:
