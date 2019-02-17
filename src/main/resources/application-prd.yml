@@ -1,7 +1,7 @@
 server:
   port: 5000
-  host: 35.206.68.8
-  default-protocol: https
+  host: 35.206.68.8:8080
+  default-protocol: http
 
 spring:
   data:
