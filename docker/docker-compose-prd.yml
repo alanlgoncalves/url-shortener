@@ -3,7 +3,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ../Dockerfile
     image: alanlgoncalves/url-shortener-app:latest
     environment:
       - "SPRING_PROFILES_ACTIVE=prd"
@@ -25,11 +25,11 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=7QZjSNbg0cor
       - MONGO_INITDB_DATABASE=dbShortener
     volumes:
-      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./mongodb/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
   nginx:
     image: nginx:latest
     volumes:
-      - ./nginx-local.conf:/etc/nginx/nginx.conf
+      - ./nginx/nginx-prd.conf:/etc/nginx/nginx.conf
     depends_on:
       - app
     ports:
