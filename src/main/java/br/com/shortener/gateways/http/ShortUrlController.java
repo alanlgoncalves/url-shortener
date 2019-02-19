@@ -7,8 +7,10 @@ import br.com.shortener.gateways.http.json.response.ShortUrlResponseJson;
 import br.com.shortener.usecases.RetrieveShortUrl;
 import br.com.shortener.usecases.SaveShortUrl;
 import br.com.shortener.usecases.SaveShortUrlRequest;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
+@Api(
+    value = "Short URL Controller",
+    tags = {"Rest API to create and use Short URL"},
+    description = "Rest API to create and use Short URL",
+    basePath = "/short-url")
 public class ShortUrlController {
 
   Logger log = LoggerFactory.getLogger(ShortUrlController.class);
@@ -46,6 +53,7 @@ public class ShortUrlController {
     this.retrieveShortUrl = retrieveShortUrl;
   }
 
+  @ApiOperation(value = "Get a Short URL from an ID")
   @GetMapping(value = "short-url/{shortUrlId}")
   public ModelAndView redirectWithUsingRedirectPrefix(
       @PathVariable("shortUrlId") final String shortUrlId, HttpServletRequest request) {
@@ -67,6 +75,7 @@ public class ShortUrlController {
         dataType = "string",
         paramType = "header")
   })
+  @ApiOperation(value = "Create a Short URL")
   @ResponseBody
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping(

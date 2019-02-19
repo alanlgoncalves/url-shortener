@@ -5,8 +5,10 @@ import br.com.shortener.domains.ShortUrlStatistics;
 import br.com.shortener.exceptions.InvalidUrlException;
 import br.com.shortener.gateways.http.json.response.ShortUrlStatisticsResponseJson;
 import br.com.shortener.usecases.RetrieveShortUrlStatistics;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+@Api(
+    value = "Short URL Admin Controller",
+    tags = {"Rest API to get statistics from a Short URL"},
+    description = "Rest API to get statistics from a Short URL",
+    basePath = "/short-url/admin/")
 @RestController
 public class ShortUrlStatisticsController {
 
@@ -38,6 +45,7 @@ public class ShortUrlStatisticsController {
         dataType = "string",
         paramType = "header")
   })
+  @ApiOperation(value = "Return Short URL statistics")
   @GetMapping(value = "short-url/admin/statistics")
   public ShortUrlStatisticsResponseJson getStatistics(
       @RequestParam("shortUrl") final String shortUrl) {
