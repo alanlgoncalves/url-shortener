@@ -69,7 +69,7 @@ executado conforme imagem abaixo:
 
 ![URL Shortener Swagger-UI](https://i.imgur.com/1QJng4d.png)
 
-#### Usuários da aplicação:
+### Usuários da aplicação:
 
 **Usuário administrador:**
 
