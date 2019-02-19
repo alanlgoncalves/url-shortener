@@ -35,11 +35,11 @@ Para a estrutura da aplicação, foi utilizada a Clean Architecture que deixa a 
 camadas que mantem as camadas internas independentes das camadas externas e separada bem a responsabilidade de cada parte
 do projeto.
 
-* Entities - Camada que encapsula as entidades do negócio.
-* User cases - Camada que contém as regras de negócios mais específicas do sistema.
-* Interface - Camada que tem como finalidade converter dados da maneira mais acessível e conveniente possível para as 
+* *Entities* - Camada que encapsula as entidades do negócio.
+* *User cases* - Camada que contém as regras de negócios mais específicas do sistema.
+* *Interface* - Camada que tem como finalidade converter dados da maneira mais acessível e conveniente possível para as 
 camadas Entities e User Cases.
-* Frameworks - Camada que é composta por ferramentas como banco de dados, interface do usuário, etc.
+* *Frameworks* - Camada que é composta por ferramentas como banco de dados, interface do usuário, etc.
 
 ## Infraestrutura
 
@@ -58,7 +58,9 @@ banco de dados (MongoDB) conforme imagem abaixo:
 # mvn clean package dockerfile:build && docker-compose -f ./docker/docker-compose-local.yml up --scale app=2 -d
 ```
 
-O número de instâncias a ser executada é informada no final do comando, onde app=2 (Número de instâncias da aplicação)
+O número de instâncias a ser executada é informada no final do comando, onde app=2 (Número de instâncias da aplicação).
+
+Os usuários da aplicação serão criados automaticamente no início da aplicação.
 
 ## Rest API
 
@@ -69,7 +71,7 @@ executado conforme imagem abaixo:
 
 #### Usuários da aplicação:
 
-Usuário administrador:
+*Usuário administrador:*
 
 ```
 username: admin
@@ -86,7 +88,7 @@ curl -X POST \
 
 ```
 
-Usuário comum:
+*Usuário comum:*
 
 ```
 username: user
