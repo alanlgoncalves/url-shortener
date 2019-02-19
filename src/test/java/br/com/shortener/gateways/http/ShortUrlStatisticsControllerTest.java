@@ -80,7 +80,7 @@ public class ShortUrlStatisticsControllerTest {
         .thenReturn(shortUrlStatisticsResponseJson);
 
     final MvcResult mvcResult =
-        mockMvc.perform(get("/admin/short-url/statistics").param("shortUrl", shortUrl)).andReturn();
+        mockMvc.perform(get("/short-url/admin/statistics").param("shortUrl", shortUrl)).andReturn();
 
     // THEN
     assertThat(mvcResult.getResponse().getStatus(), is(HttpStatus.OK.value()));
@@ -103,7 +103,7 @@ public class ShortUrlStatisticsControllerTest {
     doThrow(RecordNotFoundException.class).when(retrieveShortUrlStatistics).execute(anyString());
 
     final MvcResult mvcResult =
-        mockMvc.perform(get("/short/statistics").param("shortUrl", shortUrl)).andReturn();
+        mockMvc.perform(get("/short-url/admin/statistics").param("shortUrl", shortUrl)).andReturn();
 
     // THEN
     assertThat(mvcResult.getResponse().getStatus(), is(HttpStatus.NOT_FOUND.value()));
@@ -119,7 +119,7 @@ public class ShortUrlStatisticsControllerTest {
     doThrow(RecordNotFoundException.class).when(retrieveShortUrlStatistics).execute(anyString());
 
     final MvcResult mvcResult =
-        mockMvc.perform(get("/admin/short-url/statistics").param("shortUrl", shortUrl)).andReturn();
+        mockMvc.perform(get("/short-url/admin/statistics").param("shortUrl", shortUrl)).andReturn();
 
     // THEN
     assertThat(mvcResult.getResponse().getStatus(), is(HttpStatus.UNPROCESSABLE_ENTITY.value()));

@@ -7,6 +7,8 @@ import br.com.shortener.gateways.http.json.response.ShortUrlResponseJson;
 import br.com.shortener.usecases.RetrieveShortUrl;
 import br.com.shortener.usecases.SaveShortUrl;
 import br.com.shortener.usecases.SaveShortUrlRequest;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +59,14 @@ public class ShortUrlController {
     return new ModelAndView(String.format("redirect:%s", shortUrl.getUrl()));
   }
 
+  @ApiImplicitParams({
+    @ApiImplicitParam(
+        name = "Authorization",
+        value = "An ADMIN OR USER token",
+        required = true,
+        dataType = "string",
+        paramType = "header")
+  })
   @ResponseBody
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping(
