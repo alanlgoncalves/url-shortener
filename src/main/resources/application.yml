@@ -10,4 +10,10 @@ spring:
       port: 27017
       database: dbShortener
       uri: mongodb://${spring.data.mongodb.host}:${spring.data.mongodb.port}/${spring.data.mongodb.database}
+  security:
+    oauth2:
+      client-id: url-shortener
+      client-secret: $2a$10$fepI38wWSUOF.LhLuGyVweziHUOJjAZrVLKWdIA1MeiDN6xcjNEoS
+      access-token-validity-seconds: 3600
+      refresh-token-validity-seconds: 21600
 

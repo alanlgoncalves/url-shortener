@@ -2,6 +2,7 @@ package br.com.shortener.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -19,11 +20,9 @@ import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFacto
 @Configuration
 @EnableResourceServer
 @EnableAuthorizationServer
+@EnableConfigurationProperties(OAuth2Properties.class)
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-  static final String CLIENT_ID = "url-shortener";
-  static final String CLIENT_SECRET =
-      "$2a$10$fepI38wWSUOF.LhLuGyVweziHUOJjAZrVLKWdIA1MeiDN6xcjNEoS";
   static final String GRANT_TYPE_PASSWORD = "password";
   static final String AUTHORIZATION_CODE = "authorization_code";
   static final String REFRESH_TOKEN = "refresh_token";
@@ -31,12 +30,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
   static final String SCOPE_READ = "read";
   static final String SCOPE_WRITE = "write";
   static final String TRUST = "trust";
-  static final int ACCESS_TOKEN_VALIDITY_SECONDS = 1 * 60 * 60;
-  static final int REFRESH_TOKEN_VALIDITY_SECONDS = 6 * 60 * 60;
 
   @Autowired
   @Qualifier("authenticationManagerBean")
   private AuthenticationManager authenticationManager;
+
+  @Autowired private OAuth2Properties oAuth2Properties;
 
   @Bean
   public JwtAccessTokenConverter tokenEnhancer() {
@@ -70,11 +69,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     configurer
         .inMemory()
-        .withClient(CLIENT_ID)
-        .secret(CLIENT_SECRET)
+        .withClient(oAuth2Properties.getClientId())
+        .secret(oAuth2Properties.getClientSecret())
         .authorizedGrantTypes(GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN, IMPLICIT)
         .scopes(SCOPE_READ, SCOPE_WRITE, TRUST)
-        .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS)
-        .refreshTokenValiditySeconds(REFRESH_TOKEN_VALIDITY_SECONDS);
+        .accessTokenValiditySeconds(oAuth2Properties.getAccessTokenValiditySeconds())
+        .refreshTokenValiditySeconds(oAuth2Properties.getRefreshTokenValiditySeconds());
   }
 }
