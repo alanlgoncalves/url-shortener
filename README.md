@@ -35,11 +35,11 @@ Para a estrutura da aplicação, foi utilizada a Clean Architecture que deixa a 
 camadas que mantem as camadas internas independentes das camadas externas e separada bem a responsabilidade de cada parte
 do projeto.
 
-* *Entities* - Camada que encapsula as entidades do negócio.
-* *User cases* - Camada que contém as regras de negócios mais específicas do sistema.
-* *Interface* - Camada que tem como finalidade converter dados da maneira mais acessível e conveniente possível para as 
+* **Entities** - Camada que encapsula as entidades do negócio.
+* **User cases** - Camada que contém as regras de negócios mais específicas do sistema.
+* **Interface** - Camada que tem como finalidade converter dados da maneira mais acessível e conveniente possível para as 
 camadas Entities e User Cases.
-* *Frameworks* - Camada que é composta por ferramentas como banco de dados, interface do usuário, etc.
+* **Frameworks** - Camada que é composta por ferramentas como banco de dados, interface do usuário, etc.
 
 ## Infraestrutura
 
@@ -71,7 +71,7 @@ executado conforme imagem abaixo:
 
 #### Usuários da aplicação:
 
-*Usuário administrador:*
+**Usuário administrador:**
 
 ```
 username: admin
@@ -88,7 +88,7 @@ curl -X POST \
 
 ```
 
-*Usuário comum:*
+**Usuário comum:**
 
 ```
 username: user
