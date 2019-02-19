@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ShortUrlConverter {
 
-  public static final String SHORT_PATH_CONTEXT = "short";
+  public static final String SHORT_PATH_CONTEXT = "short-url";
 
   private Environment environment;
 

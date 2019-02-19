@@ -44,7 +44,7 @@ public class ShortUrlController {
     this.retrieveShortUrl = retrieveShortUrl;
   }
 
-  @GetMapping(value = "short/{shortUrlId}")
+  @GetMapping(value = "short-url/{shortUrlId}")
   public ModelAndView redirectWithUsingRedirectPrefix(
       @PathVariable("shortUrlId") final String shortUrlId, HttpServletRequest request) {
 
@@ -60,7 +60,7 @@ public class ShortUrlController {
   @ResponseBody
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping(
-      value = "short",
+      value = "short-url/create",
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ShortUrlResponseJson shortenURL(

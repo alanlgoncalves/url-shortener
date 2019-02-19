@@ -28,7 +28,7 @@ public class ShortUrlStatisticsController {
     this.shortUrlStatisticsConverter = shortUrlStatisticsConverter;
   }
 
-  @GetMapping(value = "short/statistics")
+  @GetMapping(value = "admin/short-url/statistics")
   public ShortUrlStatisticsResponseJson getStatistics(
       @RequestParam("shortUrl") final String shortUrl) {
     final String shortUrlId = getShortUrlId(shortUrl);
