@@ -18,7 +18,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
-class ShortUrlGatewayImplTest {
+public class ShortUrlGatewayImplTest {
 
   @Autowired private ShortUrlGateway shortUrlGateway;
 

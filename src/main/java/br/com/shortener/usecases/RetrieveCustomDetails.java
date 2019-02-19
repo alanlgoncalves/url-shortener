@@ -22,13 +22,14 @@ public class RetrieveCustomDetails implements UserDetailsService {
   public CustomUser loadUserByUsername(final String username) throws UsernameNotFoundException {
     User user;
 
-    try {
-      user = userGateway.getByUsername(username);
-      CustomUser customUser = new CustomUser(user);
-      return customUser;
-    } catch (Exception e) {
-      e.printStackTrace();
+    user = userGateway.getByUsername(username);
+
+    if (user == null) {
       throw new UsernameNotFoundException("User " + username + " was not found in the database");
     }
+
+    CustomUser customUser = new CustomUser(user);
+
+    return customUser;
   }
 }
