@@ -20,6 +20,7 @@
         <junit.jupter>5.3.2</junit.jupter>
         <fixture.version>3.1.0</fixture.version>
         <jsonpath.version>2.4.0</jsonpath.version>
+        <mongobee.version>0.13</mongobee.version>
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
     </properties>
 
@@ -47,6 +48,13 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-security</artifactId>
+        </dependency>
+
+        <!-- Mongobee -->
+        <dependency>
+            <groupId>com.github.mongobee</groupId>
+            <artifactId>mongobee</artifactId>
+            <version>${mongobee.version}</version>
         </dependency>
 
         <!--Swagger UI -->
