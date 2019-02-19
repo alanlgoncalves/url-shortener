@@ -69,6 +69,8 @@ executado conforme imagem abaixo:
 
 ![URL Shortener Swagger-UI](https://i.imgur.com/1QJng4d.png)
 
+**Exemplo:** http://35.198.6.215:8080/swagger-ui.html
+
 ### Usuários da aplicação:
 
 **Usuário administrador:**
