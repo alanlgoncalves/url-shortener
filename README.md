@@ -54,7 +54,7 @@ banco de dados (MongoDB) conforme imagem abaixo:
 ##### Para execução do projeto, é necessário o maven, docker e o docker-compose
 
 ```
-# cd  url-shortenet
+# cd  url-shortener
 # mvn clean package dockerfile:build && docker-compose -f ./docker/docker-compose-local.yml up --scale app=2 -d
 ```
 
