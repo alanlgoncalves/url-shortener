@@ -18,6 +18,12 @@ public class User {
 
   private Collection<GrantedAuthority> authorities = new ArrayList<>();
 
+  public User(String username, String password, Collection<GrantedAuthority> authorities) {
+    this.username = username;
+    this.password = password;
+    this.authorities = authorities;
+  }
+
   public String getId() {
     return id;
   }
