@@ -21,7 +21,7 @@ da quantidade de acessos, ou dados dos últimos acessos realizados da URL encurt
 * Docker
 * Docker Compose
 
-### Formatter
+#### Formatter
 
 Instalar o pluguin do google para sua IDE (Intellij ou Eclipse) para edições no código fonte:
 
@@ -55,7 +55,6 @@ banco de dados (MongoDB) conforme imagem abaixo:
 
 ```
 # cd  url-shortenet
-# mvn clean package dockerfile:build && docker-compose -f ./docker/docker-compose-local.yml up --scale app=2 -d
 # mvn clean package dockerfile:build && docker-compose -f ./docker/docker-compose-local.yml up --scale app=2 -d
 ```
 
