@@ -11,4 +11,4 @@ spring:
       database: dbShortener
       username: shortener_rw
       password: 7QZjSNbg0cor
-
+      uri: mongodb://${spring.data.mongodb.username}:${spring.data.mongodb.password}@${spring.data.mongodb.host}:${spring.data.mongodb.port}/${spring.data.mongodb.database}

@@ -77,7 +77,8 @@ public class ShortUrlControllerTest {
 
     // WHEN
     when(retrieveShortUrl.execute(anyString())).thenReturn(shortUrl);
-    final MvcResult mvcResult = mockMvc.perform(get("/short/{shortUrlId}", shortUrlId)).andReturn();
+    final MvcResult mvcResult =
+        mockMvc.perform(get("/short-url/{shortUrlId}", shortUrlId)).andReturn();
 
     // THEN
     verify(saveShortUrlRequest, times(1)).execute(any(ShortUrl.class), anyString());
@@ -100,7 +101,8 @@ public class ShortUrlControllerTest {
 
     final MvcResult mvcResult =
         mockMvc
-            .perform(post("/short").contentType(MediaType.APPLICATION_JSON).content(bodyJson))
+            .perform(
+                post("/short-url/create").contentType(MediaType.APPLICATION_JSON).content(bodyJson))
             .andReturn();
 
     // THEN
@@ -119,7 +121,8 @@ public class ShortUrlControllerTest {
     // WHEN
     final MvcResult mvcResult =
         mockMvc
-            .perform(post("/short").contentType(MediaType.APPLICATION_JSON).content(bodyJson))
+            .perform(
+                post("/short-url/create").contentType(MediaType.APPLICATION_JSON).content(bodyJson))
             .andReturn();
 
     // THEN
@@ -134,7 +137,8 @@ public class ShortUrlControllerTest {
     // WHEN
     final MvcResult mvcResult =
         mockMvc
-            .perform(post("/short").contentType(MediaType.APPLICATION_JSON).content(bodyJson))
+            .perform(
+                post("/short-url/create").contentType(MediaType.APPLICATION_JSON).content(bodyJson))
             .andReturn();
 
     // THEN
