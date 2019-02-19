@@ -105,4 +105,72 @@ curl -X POST \
 
 ```
 
+### Rotas da aplicação:
 
+**Rotas públicas:**
+```
+GET - /short-url/{shortUrlId} - Get a Short URL from an ID
+
+
+REQUEST:
+
+http://35.198.6.215:8080/short-url/5c6c6c8e8b87bc0001567693
+
+```
+
+**Rotas autenticadas:**
+```
+POST - /short-url/create - Create a Short URL (USER E ADMIN)
+
+REQUEST:
+
+curl -X POST \
+  http://35.198.6.215:8080/short-url/create \
+  -H 'authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTA2MTMxMTEsInVzZXJfbmFtZSI6InVzZXIiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiMWFjOTdmMzUtYzAxMy00MmIxLTgwODQtMTExMjliNGExMjM4IiwiY2xpZW50X2lkIjoidXJsLXNob3J0ZW5lciIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSIsInRydXN0Il19.NFrLqSwu9wXUZfUUmcJyzM4X0ZGTosI1xwEWgjW5nsN7ngTYYxABh1f4v6rnOv0UWj6-5bBq_u6zQWDKH0gUyFp9ERXIp0PHtXknLPsIfbGWZooUB5_Cg2hkFyJKvBBz9giDhgk4bXuFYZrVybxDTcnOpMuJGiPXHUOVhy0CmQHM3MTmEx3H9TWh7-DL2yXD2zoV3diNtcXHDgVICZgl9vmgZtenXsTpv30-w3mWIwG9v2noguYnM3Kt5qUTGsBMZXTSS1quTOXpX9otgIMmZoAvKMJihjcym74CcRPNJf_MtusHX9OTaiTC-m7QaAhhHK52kdAC2WRLXp21fnd7LA' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -d '{
+	"url": "https://start.spring.io/"
+}'
+
+RESPONSE: 
+
+{
+    "shortUrl": "http://35.198.6.215:8080/short-url/5c6c6c8e8b87bc0001567693"
+}
+```
+
+```
+GET - /short-url/admin/statistics - Return Short URL statistics (ADMIN)
+
+REQUEST:
+
+curl -X GET \
+  'http://35.198.6.215:8080/short-url/admin/statistics?shortUrl=http%3A%2F%2F35.198.6.215%3A8080%2Fshort-url%2F5c6c6c8e8b87bc0001567693' \
+  -H 'authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTA2MTMyOTcsInVzZXJfbmFtZSI6ImFkbWluIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiIxYTI2ZTYwYy1lZGNkLTQwM2EtOGNhNy02NTY5MGJmZjg2ZDQiLCJjbGllbnRfaWQiOiJ1cmwtc2hvcnRlbmVyIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIiwidHJ1c3QiXX0.NlRxbkYHZfDhlwd2HyrwER6bBMwNIU-eEKjtRamqct1A31GnxBaBeZlPUC_V7u0Q93k-dPVQXMqTGvTLXXiRigLFR6-hKA8ni_BFngydxg3Wr3rWRmRvpfY8DapOM2JeiwmPS24yVfH0sS9gIX-RCmyHC7zkPgzzKIJaEJGZoPI1-dsXfOEBFTZEOPSHNyG9qWtIXykfu41laXDWQahvNxFv7r0pP6IG5T8QmsPHgPYp4_QlgtCSr7cnYv9JWSdev0mf-Fqv0BWZ2W6bJ1tyHeENDDV6WTaka06ozVjfz15E9r6y7h3X-8wewl9Bnja_hBuE5h7co7bRZIU6ER8v7A' \
+  -H 'cache-control: no-cache'
+
+RESPONSE:
+
+{
+    "shortUrl": {
+        "url": "https://start.spring.io/"
+    },
+    "numberOfRequests": 3,
+    "lastRequest": {
+        "requestDateTime": "2019-02-19T20:54:38.216"
+    },
+    "lastRequests": [
+        {
+            "requestDateTime": "2019-02-19T20:54:12.404"
+        },
+        {
+            "requestDateTime": "2019-02-19T20:54:34.671"
+        },
+        {
+            "requestDateTime": "2019-02-19T20:54:38.216"
+        }
+    ]
+}
+
+```
