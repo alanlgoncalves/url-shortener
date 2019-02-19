@@ -1,6 +1,7 @@
 package br.com.shortener.converters;
 
 import br.com.shortener.domains.ShortUrlStatistics;
+import br.com.shortener.gateways.http.json.response.ShortUrlJson;
 import br.com.shortener.gateways.http.json.response.ShortUrlRequestResponseJson;
 import br.com.shortener.gateways.http.json.response.ShortUrlStatisticsResponseJson;
 import br.com.shortener.gateways.http.json.response.builders.ShortUrlStatisticsResponseJsonBuilder;
@@ -16,9 +17,14 @@ public class ShortUrlStatisticsConverter {
 
   private final ShortUrlRequestConverter shortUrlRequestConverter;
 
+  private final ShortUrlConverter shortUrlConverter;
+
   @Autowired
-  public ShortUrlStatisticsConverter(final ShortUrlRequestConverter shortUrlRequestConverter) {
+  public ShortUrlStatisticsConverter(
+      final ShortUrlRequestConverter shortUrlRequestConverter,
+      final ShortUrlConverter shortUrlConverter) {
     this.shortUrlRequestConverter = shortUrlRequestConverter;
+    this.shortUrlConverter = shortUrlConverter;
   }
 
   public ShortUrlStatisticsResponseJson convertToShortUrlResponseJson(
@@ -41,8 +47,11 @@ public class ShortUrlStatisticsConverter {
               .get();
     }
 
+    final ShortUrlJson shortUrlJson =
+        shortUrlConverter.convertToShortUrlJson(shortUrlStatistics.getShortUrl());
+
     return new ShortUrlStatisticsResponseJsonBuilder()
-        .setShortUrl(shortUrlStatistics.getShortUrl())
+        .setShortUrl(shortUrlJson)
         .setNumberOfRequests(shortUrlStatistics.getNumberOfRequests())
         .setLastRequestDateTime(lastRequest)
         .setLastTenRequests(shortUrlRequestResponseJsonList)

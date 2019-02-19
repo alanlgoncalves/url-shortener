@@ -1,25 +1,35 @@
 package br.com.shortener.gateways.http.json.response;
 
-import br.com.shortener.domains.collections.ShortUrl;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.util.List;
 
+@ApiModel(
+    value = "ShortUrlStatisticsResponseJson",
+    description = "Contains the Short URL statistics")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ShortUrlStatisticsResponseJson {
 
-  private ShortUrl shortUrl;
+  @ApiModelProperty(value = "The Short URL information", dataType = "ShortUrlJson")
+  private ShortUrlJson shortUrl;
 
+  @ApiModelProperty(value = "The Short URL number of requests", dataType = "Long")
   private long numberOfRequests;
 
+  @ApiModelProperty(
+      value = "The Short URL last request information",
+      dataType = "ShortUrlRequestResponseJson")
   private ShortUrlRequestResponseJson lastRequest;
 
+  @ApiModelProperty(value = "The Short URL last requests list information", dataType = "List")
   private List<ShortUrlRequestResponseJson> lastRequests;
 
   public ShortUrlStatisticsResponseJson() {}
 
   public ShortUrlStatisticsResponseJson(
-      final ShortUrl shortUrl,
+      final ShortUrlJson shortUrl,
       final long numberOfRequests,
       final ShortUrlRequestResponseJson lastRequest,
       final List<ShortUrlRequestResponseJson> lastRequests) {
@@ -29,11 +39,11 @@ public class ShortUrlStatisticsResponseJson {
     this.lastRequests = lastRequests;
   }
 
-  public ShortUrl getShortUrl() {
+  public ShortUrlJson getShortUrl() {
     return shortUrl;
   }
 
-  public void setShortUrl(final ShortUrl shortUrl) {
+  public void setShortUrl(final ShortUrlJson shortUrl) {
     this.shortUrl = shortUrl;
   }
 

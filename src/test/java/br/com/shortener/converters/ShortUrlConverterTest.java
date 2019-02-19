@@ -1,6 +1,7 @@
 package br.com.shortener.converters;
 
 import br.com.shortener.domains.collections.ShortUrl;
+import br.com.shortener.gateways.http.json.response.ShortUrlJson;
 import br.com.shortener.gateways.http.json.response.ShortUrlResponseJson;
 import br.com.shortener.templates.Templates;
 import br.com.six2six.fixturefactory.Fixture;
@@ -36,5 +37,17 @@ class ShortUrlConverterTest {
 
     // THEN
     assertThat(shortUrlResponseJson.getShortUrl()).isEqualTo(shortUrlResponseJson.getShortUrl());
+  }
+
+  @Test
+  void convertToShortUrlJson() {
+    // GIVEN
+    final ShortUrl shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
+
+    // WHEN
+    ShortUrlJson shortUrlson = shortUrlConverterl.convertToShortUrlJson(shortUrl);
+
+    // THEN
+    assertThat(shortUrlson.getUrl()).isEqualTo(shortUrl.getUrl());
   }
 }

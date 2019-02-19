@@ -1,6 +1,7 @@
 package br.com.shortener.converters;
 
 import br.com.shortener.domains.collections.ShortUrl;
+import br.com.shortener.gateways.http.json.response.ShortUrlJson;
 import br.com.shortener.gateways.http.json.response.ShortUrlResponseJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -28,5 +29,9 @@ public class ShortUrlConverter {
             "%s://%s/%s/%s", protocol, serverAddress, SHORT_PATH_CONTEXT, shortUrl.getId());
 
     return new ShortUrlResponseJson(url);
+  }
+
+  public ShortUrlJson convertToShortUrlJson(final ShortUrl shortUrl) {
+    return new ShortUrlJson(shortUrl.getUrl());
   }
 }

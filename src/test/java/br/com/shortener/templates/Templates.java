@@ -16,4 +16,5 @@ public class Templates {
       "SHORT_URL_STATISTICS_RESPONSE_JSON";
   public static final String SHORT_URL_REQUEST_RESPONSE_JSON = "SHORT_URL_REQUEST_RESPONSE_JSON";
   public static final String SHORT_URL_RESPONSE_JSON = "SHORT_URL_RESPONSE_JSON";
+  public static final String SHORT_URL_JSON = "SHORT_URL_JSON";
 }

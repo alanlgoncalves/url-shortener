@@ -1,18 +1,18 @@
 package br.com.shortener.gateways.http.json.response.builders;
 
-import br.com.shortener.domains.collections.ShortUrl;
+import br.com.shortener.gateways.http.json.response.ShortUrlJson;
 import br.com.shortener.gateways.http.json.response.ShortUrlRequestResponseJson;
 import br.com.shortener.gateways.http.json.response.ShortUrlStatisticsResponseJson;
 
 import java.util.List;
 
 public class ShortUrlStatisticsResponseJsonBuilder {
-  private ShortUrl shortUrl;
+  private ShortUrlJson shortUrl;
   private long numberOfRequests;
   private ShortUrlRequestResponseJson lastRequest;
   private List<ShortUrlRequestResponseJson> lastTenRequests;
 
-  public ShortUrlStatisticsResponseJsonBuilder setShortUrl(final ShortUrl shortUrl) {
+  public ShortUrlStatisticsResponseJsonBuilder setShortUrl(final ShortUrlJson shortUrl) {
     this.shortUrl = shortUrl;
     return this;
   }
