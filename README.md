@@ -47,7 +47,7 @@ Para manter a boa performance da aplicação, foi utilizado o docker como tecnol
 servidor Load Balance (NGINX), que possui rota direta para um número N de instâncias do URL-SHORTENER apontados para um 
 banco de dados (MongoDB) conforme imagem abaixo:
 
-![URL Shortener Infra](https://i.imgur.com/EYpo3qw.png)
+![URL Shortener Infra](https://i.imgur.com/B8pH6dm.png)
 
 ### Execução do projeto
 
