@@ -24,7 +24,7 @@ public class ShortUrlRequestGatewayImpl implements ShortUrlRequestGateway {
 
   @Override
   public List<ShortUrlRequest> getLastTenRequests(final String shortUrlId) {
-    return shortUrlRequestRepository.countShortUrlRequestByShortUrlIdOrderByRequestDateTime(
+    return shortUrlRequestRepository.countShortUrlRequestByShortUrlIdOrderByRequestDateTimeDesc(
         shortUrlId, PageRequest.of(0, 10));
   }
 

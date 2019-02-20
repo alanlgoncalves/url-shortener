@@ -12,6 +12,6 @@ public interface ShortUrlRequestRepository extends MongoRepository<ShortUrlReque
 
   long countShortUrlRequestByShortUrlId(final String shortUrlId);
 
-  List<ShortUrlRequest> countShortUrlRequestByShortUrlIdOrderByRequestDateTime(
+  List<ShortUrlRequest> countShortUrlRequestByShortUrlIdOrderByRequestDateTimeDesc(
       final String shortUrlId, final Pageable pageable);
 }
