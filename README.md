@@ -32,11 +32,10 @@ https://github.com/google/google-java-format
 
 For the application structure, the Clean Architecture was used which leaves the application separate in layers that keep the inner layers independent of the outer layers and separate well the responsibility of each part from the project.
 
-* **Entities** - Camada que encapsula as entidades do negócio.
-* **User cases** - Camada que contém as regras de negócios mais específicas do sistema.
-* **Interface** - Camada que tem como finalidade converter dados da maneira mais acessível e conveniente possível para as 
-camadas Entities e User Cases.
-* **Frameworks** - Camada que é composta por ferramentas como banco de dados, interface do usuário, etc.
+* **Entities** - Layer that encapsulate the business entities and has the specific business rules.
+* **User cases** - Layer that encapsulate all application rules.
+* **Interface** - Layer that has the purpose of convert data in the most accessible and convenient way possible to the Entities and User Cases layers.
+* **Frameworks** - Layer that has tools like database, user interface, etc.
 
 ## Infrastructure
 
