@@ -1,11 +1,10 @@
 # URL-SHORTENER
 
-## Objetivo
+## Objective
 
-Projeto para realizar o encurtamento de URLs, realizando o redirecionamento para a URL original, e guardando estatísticas
-da quantidade de acessos, ou dados dos últimos acessos realizados da URL encurtada.
+Project to shorten URLs, redirect to original URL, and save statistics the number of hits, or data of the last hits made from the shortened URL.
 
-## Tecnologias
+## Technologies
 
 * Servidor de aplicação: Tomcat (Spring Boot)
 * Banco de dados: MongoDB
@@ -23,17 +22,15 @@ da quantidade de acessos, ou dados dos últimos acessos realizados da URL encurt
 
 #### Formatter
 
-Instalar o pluguin do google para sua IDE (Intellij ou Eclipse) para edições no código fonte:
+Install the google-java-formatter plugin for your IDE (Intellij or Eclipse) for source code edits:
 
 https://github.com/google/google-java-format
 
-## Arquitetura do Projeto
+## Project Archtecture
 
 ![Clean Architecture](http://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg)
 
-Para a estrutura da aplicação, foi utilizada a Clean Architecture que deixa a aplicação separada em
-camadas que mantem as camadas internas independentes das camadas externas e separada bem a responsabilidade de cada parte
-do projeto.
+For the application structure, the Clean Architecture was used which leaves the application separate in layers that keep the inner layers independent of the outer layers and separate well the responsibility of each part from the project.
 
 * **Entities** - Camada que encapsula as entidades do negócio.
 * **User cases** - Camada que contém as regras de negócios mais específicas do sistema.
@@ -41,39 +38,36 @@ do projeto.
 camadas Entities e User Cases.
 * **Frameworks** - Camada que é composta por ferramentas como banco de dados, interface do usuário, etc.
 
-## Infraestrutura
+## Infrastructure
 
-Para manter a boa performance da aplicação, foi utilizado o docker como tecnologia de conteinerização para criar um 
-servidor Load Balance (NGINX), que possui rota direta para um número N de instâncias do URL-SHORTENER apontados para um 
-banco de dados (MongoDB) conforme imagem abaixo:
+To maintain good application performance, the docker was used as a containerization technology to create a Load Balance server (NGINX), which has a direct route to a number N of URL-SHORTENER instances pointed to a database (MongoDB) as the image below:
 
 ![URL Shortener Infra](https://i.imgur.com/B8pH6dm.png)
 
-### Execução do projeto
+### Project Startup
 
-##### Para execução do projeto, é necessário o maven, docker e o docker-compose
+##### Project startup requires maven, docker and docker-compose
 
 ```
 # cd  url-shortener
 # mvn clean package dockerfile:build && docker-compose -f ./docker/docker-compose-local.yml up --scale app=2 -d
 ```
 
-O número de instâncias a ser executada é informada no final do comando, onde app=2 (Número de instâncias da aplicação).
+The number of instances to be executed is reported at the end of the command, where app=2 (Number of application instances).
 
-Os usuários da aplicação serão criados automaticamente no início da aplicação.
+Application users will be created automatically at the start of the application.
 
 ## Rest API
 
-Toda a documentação das APIs pode ser encontrada através do caminho /swagger-ui.html quando o projeto estiver sendo 
-executado conforme imagem abaixo:
+All API documentation can be found via the /swagger-ui.html path when the project is being executed as below image:
 
 ![URL Shortener Swagger-UI](https://i.imgur.com/1QJng4d.png)
 
-**Exemplo:** http://35.198.6.215:8080/swagger-ui.html
+**Example:** http://35.198.6.215:8080/swagger-ui.html
 
-### Usuários da aplicação:
+### Application Users:
 
-**Usuário administrador:**
+**Admin User:**
 
 ```
 username: admin
@@ -90,7 +84,7 @@ curl -X POST \
 
 ```
 
-**Usuário comum:**
+**Common User:**
 
 ```
 username: user
@@ -107,9 +101,9 @@ curl -X POST \
 
 ```
 
-### Rotas da aplicação:
+### Appication Paths:
 
-**Rotas públicas:**
+**Public Paths:**
 ```
 GET - /short-url/{shortUrlId} - Get a Short URL from an ID
 
@@ -120,7 +114,7 @@ http://35.198.6.215:8080/short-url/5c6c6c8e8b87bc0001567693
 
 ```
 
-**Rotas autenticadas:**
+**Authenticated Paths:**
 ```
 POST - /short-url/create - Create a Short URL (USER E ADMIN)
 
