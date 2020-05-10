@@ -1,4 +1,5 @@
 # URL-SHORTENER
+[![Build Status](https://travis-ci.com/alanlgoncalves/url-shortener.svg?branch=master)](https://travis-ci.com/alanlgoncalves/url-shortener)
 
 ## Objective
 
