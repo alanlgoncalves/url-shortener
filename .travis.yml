@@ -1,4 +1,5 @@
 language: java
+sudo: false
 install: true
 script:
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=alanlgoncalves_url-shortener
@@ -7,7 +8,8 @@ addons:
   sonarcloud:
     organization: alanlgoncalves
     token:
-      secure: h4JKeUJCipV8FTqP6TVkvQpG4xM0BgWNvaYjJPCeZ8QuF1dsy9Ek0QOl/7UjOCpfCFehyUJIH9xXUKp5QSDAaEJtHSVDaCOSvH00YEz6cksXspzTuLWs9wHOuoZVdd8BCTU3pUHw57yNrQ4yAO0FMyjV9sEUH95KvogTgJihdNFYfbimfSgxRGb4dLSQP/g5AeapJgpZn4AD41Fu8d9z+kt6dJuRLhk2UB3U2cRUml4FUQfcLberp7LxTIra5GiAUX+/lEM3R1mIp/JS//uwAXvizQZ856xjoxvED8w3tgpgCc2H6QQ8jlz28yaLsSbpD6d+mppTPX8Fj9FaZ+Zd48Pi50iRf9Ms2baj6n2ekdcqWX0KS8+NdDJc+57TRUdjvn3pp3i6p6n+OGIGz2K4nk0POQKBLlBon/HXGKK8KMVl0Mn/Z/xzShKw/OD34Vk6AYJ2qt8lvXf6wgtGBbOA9LoAwmYHMkkKNOhfoiKh//ikmi+RjdUVbqEDHsXzK/lXOMzX28KaPCJvChD1bvmDxarlFV3XVtXyZvaKr3LLZwO6aC/ApD8Trc8Pp7nyVzD3RBXhhcEtxpMJ0Zem81gNqWrsUFqQTlZRT0REyS7npTjZ410ujNE/JbUtYqLDXir85yJuJO9m6/Y+iA2wxsZb3n/rqfv18b+CcXV3YH49dAw=
+      secure: "JQASxOt5SMktab+0VLAMQI5j/GladHUJxv2j0dcXlLIFYQ0YyJXQHcRSbkk74hWE7dwrUGwqjxN+3KnGQbuMxd+DPejBLV/xtlSzO8CCLr6la76zSf5Vz6K1IV83+lI77XDd36Np8RjH69vtOQ+/vz7yN0gcteYBs/rZuoSc6ZF608Q1G/W2FCWohyp2a4GjvUo/tLgDpK/o5dDdqGTCiv6nIv+CF2DMUIG9gkctwxnm1Bhg9dYK3BDvROZKiA0n4LmOJmxZ9QgXTIA/sNyQn3V9FlXazLDhRAlx9gwZ0wN+NStBc+T1FqBqp2ZSE+cLxytTdM/9gxh8z6PKSTmQmCF+FR7RAOnfdUlmMKnuC+79/Z23zaiHHet2LQtpT9Xqd5zb+aUvaOVaWAiuglHiIs+A7gsxwNziSwh5eXcNUfoLd6idZKa7hZ8AYRfckXuQFmD5jfX/jeC4ADP+aIvf4rDE6KvPwvVUo4vyt58A8LnkTS4ji0xeVsJrMaU4J0kFSY8SAwxX2GF6ywp8sT94xLMHZJLk3Zyz843xxvlMuhiO3cteSjsOumjlNkoyeTtqhkQEphjuAasIynzztxFTx/Tqf+iCQuJ/x4RTFuiy1yxhQNqRL806td4t3Gs4ddZOimXl9VKyZs/Im39/tfa1g6Rwax8MgWrQAD3gq2Ft888="
 cache:
   directories:
     - "$HOME/.m2"
+    - "$HOME/.sonar/cache"
