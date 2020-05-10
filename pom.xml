@@ -22,7 +22,6 @@
         <jsonpath.version>2.4.0</jsonpath.version>
         <mongobee.version>0.13</mongobee.version>
         <jacoco.version>0.8.5</jacoco.version>
-        <covertura.version>2.7</covertura.version>
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
     </properties>
 
@@ -121,6 +120,7 @@
             <scope>provided</scope>
         </dependency>
 
+
     </dependencies>
 
     <dependencyManagement>
@@ -197,19 +197,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>${covertura.version}</version>
-                <configuration>
-                    <formats>
-                        <format>html</format>
-                        <format>xml</format>
-                    </formats>
-                    <check/>
-                </configuration>
             </plugin>
         </plugins>
     </build>
