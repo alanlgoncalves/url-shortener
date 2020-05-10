@@ -5,6 +5,13 @@ install: true
 script:
   - mvn clean install
   - bash <(curl -s https://codecov.io/bash)
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=alanlgoncalves_url-shortener
+
+addons:
+  sonarcloud:
+    organization: "alanlgoncalves"
+    token:
+      secure: "bwf+wUlPZLS3leFTX79ivW15knccN1zRkshqfoWVzHzKfiPZ93RqlYJgCF9AHE54FM/jOGBGxAf83l2PIUOoeXqpqy4MOeVBGyqXT6ZmRimRHW97F5A65m1DJ/q69diLzPc5UfeiGvh+AhjLZ0gH5UVo/f8TLkrxjSi/Sjux1A56dP3w9W64PmXqSJ07MkwZmNWwwUoV8rxXkWEn6pQOjZ0e1HpaR6vjHs+z/BRNe2HFF3ZeKQwjlXjry2iOFdmPx3fzeaknGbGcsp0w8EOphj8Tzkh6x2WiVCDrZDMDpThllxzXSCKr8ti6AGovtCIbPE2kfuI/hrSZTX5EBdfg/Ijc/O9qujeZcViJ4Xs/PAo0kGLtGAnIM9rWoDi+7Ne3CbjPZPM9dq9QIYZnpbPLzwpGE/K0KtS9dPvmEO4xh4HvwHHBtNgc5o/xu6i2RblNdHzKgRTGzyTcehZLj4EPQdOIuGQ8KRjLIRKv55c84VmSOiTMULPlqmbKjDoCMu1h8ytUsrI9gYjvFDKY1vomi4ZZPYgTIqV5oUxoFGdVOaaTLWsmgUTMwKzjR64Px6P2IOwOdPk4NC8aNoBQxQqPU71+bECr5oOtTzQUiE1ccracUYEj7toCOgMWrfcDd39IyNfKUhr7TPiX1IxdMvWX1CWGMROqQa/eFLSe4qcYRH8="
 
 cache:
   directories:
