@@ -1,0 +1,7 @@
+ignore:
+  - "**/config/**"
+  - "**/domains/**"
+  - "**/exceptions/**"
+  - "**/*Json.*"
+  - "**/*Repository.*"
+  - "**/*Application.*"
