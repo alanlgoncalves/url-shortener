@@ -44,7 +44,7 @@ public class ShortUrlStatisticsConverter {
           shortUrlRequestResponseJsonList.stream()
               .sorted((o1, o2) -> o2.getRequestDateTime().compareTo(o1.getRequestDateTime()))
               .findFirst()
-              .get();
+              .orElse(null);
     }
 
     final ShortUrlJson shortUrlJson =
