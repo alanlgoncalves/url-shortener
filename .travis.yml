@@ -2,6 +2,3 @@ language: java
 env:
   global:
     - CODECOV_TOKEN=$CODECOV_TOKEN
-cache:
-  directories:
-    - $HOME/.m2
