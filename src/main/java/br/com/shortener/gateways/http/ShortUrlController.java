@@ -57,8 +57,6 @@ public class ShortUrlController {
   public ModelAndView redirectWithUsingRedirectPrefix(
       @PathVariable("shortUrlId") final String shortUrlId, HttpServletRequest request) {
 
-    log.info("Request for Short URL: {}", shortUrlId.replaceAll("[\n|\r|\t]", "_"));
-
     final ShortUrl shortUrl = retrieveShortUrl.execute(shortUrlId);
 
     saveShortUrlRequest.execute(shortUrl, request.getRemoteAddr());
