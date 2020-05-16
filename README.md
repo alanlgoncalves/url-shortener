@@ -1,7 +1,10 @@
 # URL-SHORTENER
 [![Build Status](https://travis-ci.com/alanlgoncalves/url-shortener.svg?branch=master)](https://travis-ci.com/alanlgoncalves/url-shortener)
-[![codecov](https://codecov.io/gh/alanlgoncalves/url-shortener/branch/master/graph/badge.svg)](https://codecov.io/gh/alanlgoncalves/url-shortener)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=alanlgoncalves_url-shortener&metric=coverage)](https://sonarcloud.io/dashboard?id=alanlgoncalves_url-shortener)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=alanlgoncalves_url-shortener&metric=alert_status)](https://sonarcloud.io/dashboard?id=alanlgoncalves_url-shortener)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=alanlgoncalves_url-shortener&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=alanlgoncalves_url-shortener)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=alanlgoncalves_url-shortener&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=alanlgoncalves_url-shortener)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=alanlgoncalves_url-shortener&metric=security_rating)](https://sonarcloud.io/dashboard?id=alanlgoncalves_url-shortener)
 
 ## Objective
 
