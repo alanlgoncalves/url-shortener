@@ -19,7 +19,7 @@ public class RetrieveCustomDetails implements UserDetailsService {
   }
 
   @Override
-  public CustomUser loadUserByUsername(final String username) throws UsernameNotFoundException {
+  public CustomUser loadUserByUsername(final String username) {
     User user;
 
     user = userGateway.getByUsername(username);
@@ -28,8 +28,6 @@ public class RetrieveCustomDetails implements UserDetailsService {
       throw new UsernameNotFoundException("User " + username + " was not found in the database");
     }
 
-    CustomUser customUser = new CustomUser(user);
-
-    return customUser;
+    return new CustomUser(user);
   }
 }

@@ -19,9 +19,8 @@ import java.net.URL;
 
 @Api(
     value = "Short URL Admin Controller",
-    tags = {"Rest API to get statistics from a Short URL"},
-    description = "Rest API to get statistics from a Short URL",
-    basePath = "/short-url/admin/")
+    tags = {"Rest API to get statistics from a Short URL"}
+    )
 @RestController
 public class ShortUrlStatisticsController {
 

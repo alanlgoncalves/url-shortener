@@ -1,4 +1,4 @@
-package br.com.shortener.gateways.repository.Impl;
+package br.com.shortener.gateways.repository.impl;
 
 import br.com.shortener.domains.collections.ShortUrl;
 import br.com.shortener.gateways.ShortUrlGateway;

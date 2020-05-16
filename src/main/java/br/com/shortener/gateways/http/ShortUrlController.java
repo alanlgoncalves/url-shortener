@@ -26,9 +26,8 @@ import javax.validation.Valid;
 @Controller
 @Api(
     value = "Short URL Controller",
-    tags = {"Rest API to create and use Short URL"},
-    description = "Rest API to create and use Short URL",
-    basePath = "/short-url")
+    tags = {"Rest API to create and use Short URL"}
+    )
 public class ShortUrlController {
 
   Logger log = LoggerFactory.getLogger(ShortUrlController.class);
@@ -58,7 +57,7 @@ public class ShortUrlController {
   public ModelAndView redirectWithUsingRedirectPrefix(
       @PathVariable("shortUrlId") final String shortUrlId, HttpServletRequest request) {
 
-    log.info("Request for Short URL: {}", shortUrlId);
+    log.info("Request for Short URL: {}", shortUrlId.replaceAll("[\n|\r|\t]", "_"));
 
     final ShortUrl shortUrl = retrieveShortUrl.execute(shortUrlId);
 
