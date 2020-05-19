@@ -9,6 +9,7 @@ public class Templates {
   public static final String SHORT_URL_REQUEST_1 = "SHORT_URL_REQUEST_1";
   public static final String SHORT_URL_REQUEST_2 = "SHORT_URL_REQUEST_2";
   public static final String SHORT_URL_STATISTICS = "SHORT_URL_STATISTICS";
+  public static final String SHORT_URL_STATISTICS_WITHOUT_HISTORY = "SHORT_URL_STATISTICS_WITHOUT_HISTORY";
   public static final String USER = "USER";
 
   // JSON

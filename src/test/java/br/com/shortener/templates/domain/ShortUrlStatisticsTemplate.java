@@ -7,6 +7,7 @@ import br.com.shortener.templates.Templates;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
 import br.com.six2six.fixturefactory.loader.TemplateLoader;
+import java.util.ArrayList;
 
 public class ShortUrlStatisticsTemplate implements TemplateLoader {
 
@@ -22,6 +23,17 @@ public class ShortUrlStatisticsTemplate implements TemplateLoader {
                 add(
                     "lastTenRequests",
                     has(10).of(ShortUrlRequest.class, Templates.SHORT_URL_REQUEST_1));
+              }
+            });
+
+    Fixture.of(ShortUrlStatistics.class)
+        .addTemplate(
+            Templates.SHORT_URL_STATISTICS_WITHOUT_HISTORY,
+            new Rule() {
+              {
+                add("shortUrl", one(ShortUrl.class, Templates.SHORT_URL));
+                add("numberOfRequests", 0l);
+                add("lastTenRequests", new ArrayList<>());
               }
             });
   }
