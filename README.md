@@ -12,8 +12,8 @@ Project to shorten URLs, redirect to original URL, and save statistics the numbe
 
 ## Technologies
 
-* Servidor de aplicação: Tomcat (Spring Boot)
-* Banco de dados: MongoDB
+* Tomcat (Spring Boot)
+* MongoDB
 * Java 8 (Streams)
 * Spring Data
 * Spring Security
