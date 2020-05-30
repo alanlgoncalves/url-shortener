@@ -47,41 +47,69 @@ public class ShortUrlRequestGatewayImplTest {
 
   @Test
   void countRequestsWithSuccess() {
-    // GIVEN
-    String shortUrlId = shortUrl.getId();
+    final String shortUrlId;
 
-    // WHEN
-    Long shortUrlNumberOfRequests = shortUrlRequestGateway.countRequests(shortUrlId);
+    Given:
+    {
+      shortUrlId = shortUrl.getId();
+    }
 
-    // THEN
-    assertThat(shortUrlNumberOfRequests).isEqualTo(2);
+    final Long shortUrlNumberOfRequests;
+
+    When:
+    {
+      shortUrlNumberOfRequests = shortUrlRequestGateway.countRequests(shortUrlId);
+    }
+
+    Then:
+    {
+      assertThat(shortUrlNumberOfRequests).isEqualTo(2);
+    }
   }
 
   @Test
   void getLastTenRequestsWithSuccess() {
-    // GIVEN
-    String shortUrlId = shortUrl.getId();
+    final String shortUrlId;
 
-    // WHEN
-    List<ShortUrlRequest> lastTenRequests = shortUrlRequestGateway.getLastTenRequests(shortUrlId);
+    Given:
+    {
+      shortUrlId = shortUrl.getId();
+    }
 
-    // THEN
-    assertThat(lastTenRequests.size()).isEqualTo(2);
+    final List<ShortUrlRequest> lastTenRequests;
+
+    When:
+    {
+      lastTenRequests = shortUrlRequestGateway.getLastTenRequests(shortUrlId);
+    }
+
+    Then:
+    {
+      assertThat(lastTenRequests.size()).isEqualTo(2);
+    }
   }
 
   @Test
   void saveShortUrlRequestWithSuccess() {
-    // GIVEN
-    ShortUrlRequest shortUrlRequest1 =
-        Fixture.from(ShortUrlRequest.class).gimme(Templates.SHORT_URL_REQUEST_1);
+    final ShortUrlRequest shortUrlRequest1;
+    Given:
+    {
+      shortUrlRequest1 = Fixture.from(ShortUrlRequest.class).gimme(Templates.SHORT_URL_REQUEST_1);
+    }
 
-    // WHEN
-    ShortUrlRequest saveShortUrlRequest = shortUrlRequestGateway.save(shortUrlRequest1);
+    final ShortUrlRequest saveShortUrlRequest;
 
-    // THEN
-    assertThat(saveShortUrlRequest.getRequestIp()).isEqualTo(shortUrlRequest1.getRequestIp());
-    assertThat(saveShortUrlRequest.getShortUrl()).isEqualTo(shortUrlRequest1.getShortUrl());
-    assertThat(saveShortUrlRequest.getRequestDateTime())
-        .isEqualTo(shortUrlRequest1.getRequestDateTime());
+    When:
+    {
+      saveShortUrlRequest = shortUrlRequestGateway.save(shortUrlRequest1);
+    }
+
+    Then:
+    {
+      assertThat(saveShortUrlRequest.getRequestIp()).isEqualTo(shortUrlRequest1.getRequestIp());
+      assertThat(saveShortUrlRequest.getShortUrl()).isEqualTo(shortUrlRequest1.getShortUrl());
+      assertThat(saveShortUrlRequest.getRequestDateTime())
+          .isEqualTo(shortUrlRequest1.getRequestDateTime());
+    }
   }
 }

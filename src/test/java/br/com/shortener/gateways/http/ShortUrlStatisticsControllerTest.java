@@ -66,62 +66,102 @@ public class ShortUrlStatisticsControllerTest {
   @Test
   public void getStatisticsWithSuccess() throws Exception {
 
-    // GIVEN
-    final String shortUrl = "http://127.0.0.1/123456";
-    final ShortUrlStatistics shortUrlStatistics =
-        Fixture.from(ShortUrlStatistics.class).gimme(Templates.SHORT_URL_STATISTICS);
-    final ShortUrlStatisticsResponseJson shortUrlStatisticsResponseJson =
-        Fixture.from(ShortUrlStatisticsResponseJson.class)
-            .gimme(Templates.SHORT_URL_STATISTICS_RESPONSE_JSON);
+    final ShortUrlStatisticsResponseJson shortUrlStatisticsResponseJson;
+    final ShortUrlStatistics shortUrlStatistics;
+    final String shortUrl;
 
-    // WHEN
-    when(retrieveShortUrlStatistics.execute(anyString())).thenReturn(shortUrlStatistics);
-    when(shortUrlStatisticsConverter.convertToShortUrlResponseJson(any(ShortUrlStatistics.class)))
-        .thenReturn(shortUrlStatisticsResponseJson);
+    Given:
+    {
+      shortUrl = "http://127.0.0.1/123456";
 
-    final MvcResult mvcResult =
-        mockMvc.perform(get("/short-url/admin/statistics").param("shortUrl", shortUrl)).andReturn();
+      shortUrlStatistics =
+          Fixture.from(ShortUrlStatistics.class).gimme(Templates.SHORT_URL_STATISTICS);
 
-    // THEN
-    assertThat(mvcResult.getResponse().getStatus(), is(HttpStatus.OK.value()));
-    assertThat(mvcResult.getResponse().getContentAsString(), hasJsonPath("$.numberOfRequests"));
-    assertThat(mvcResult.getResponse().getContentAsString(), hasJsonPath("$.shortUrl"));
-    assertThat(mvcResult.getResponse().getContentAsString(), hasJsonPath("$.lastRequest"));
-    assertThat(mvcResult.getResponse().getContentAsString(), hasJsonPath("$.lastRequests"));
-    assertThat(
-        mvcResult.getResponse().getContentAsString(),
-        hasJsonPath("$.numberOfRequests", equalTo(10)));
+      shortUrlStatisticsResponseJson =
+          Fixture.from(ShortUrlStatisticsResponseJson.class)
+              .gimme(Templates.SHORT_URL_STATISTICS_RESPONSE_JSON);
+    }
+
+    final MvcResult mvcResult;
+
+    When:
+    {
+      when(retrieveShortUrlStatistics.execute(anyString())).thenReturn(shortUrlStatistics);
+      when(shortUrlStatisticsConverter.convertToShortUrlResponseJson(any(ShortUrlStatistics.class)))
+          .thenReturn(shortUrlStatisticsResponseJson);
+
+      mvcResult =
+          mockMvc
+              .perform(get("/short-url/admin/statistics").param("shortUrl", shortUrl))
+              .andReturn();
+    }
+
+    Then:
+    {
+      assertThat(mvcResult.getResponse().getStatus(), is(HttpStatus.OK.value()));
+      assertThat(mvcResult.getResponse().getContentAsString(), hasJsonPath("$.numberOfRequests"));
+      assertThat(mvcResult.getResponse().getContentAsString(), hasJsonPath("$.shortUrl"));
+      assertThat(mvcResult.getResponse().getContentAsString(), hasJsonPath("$.lastRequest"));
+      assertThat(mvcResult.getResponse().getContentAsString(), hasJsonPath("$.lastRequests"));
+      assertThat(
+          mvcResult.getResponse().getContentAsString(),
+          hasJsonPath("$.numberOfRequests", equalTo(10)));
+    }
   }
 
   @Test
   public void getStatisticsNotFound() throws Exception {
 
-    // GIVEN
-    final String shortUrl = "http://127.0.0.1/123456";
+    final String shortUrl;
 
-    // WHEN
-    doThrow(RecordNotFoundException.class).when(retrieveShortUrlStatistics).execute(anyString());
+    Given:
+    {
+      shortUrl = "http://127.0.0.1/123456";
+    }
 
-    final MvcResult mvcResult =
-        mockMvc.perform(get("/short-url/admin/statistics").param("shortUrl", shortUrl)).andReturn();
+    final MvcResult mvcResult;
 
-    // THEN
-    assertThat(mvcResult.getResponse().getStatus(), is(HttpStatus.NOT_FOUND.value()));
+    When:
+    {
+      doThrow(RecordNotFoundException.class).when(retrieveShortUrlStatistics).execute(anyString());
+
+      mvcResult =
+          mockMvc
+              .perform(get("/short-url/admin/statistics").param("shortUrl", shortUrl))
+              .andReturn();
+    }
+
+    Then:
+    {
+      assertThat(mvcResult.getResponse().getStatus(), is(HttpStatus.NOT_FOUND.value()));
+    }
   }
 
   @Test
   public void getStatisticsWithInvalidUrl() throws Exception {
 
-    // GIVEN
-    final String shortUrl = "test";
+    final String shortUrl;
 
-    // WHEN
-    doThrow(RecordNotFoundException.class).when(retrieveShortUrlStatistics).execute(anyString());
+    Given:
+    {
+      shortUrl = "test";
+    }
 
-    final MvcResult mvcResult =
-        mockMvc.perform(get("/short-url/admin/statistics").param("shortUrl", shortUrl)).andReturn();
+    final MvcResult mvcResult;
 
-    // THEN
-    assertThat(mvcResult.getResponse().getStatus(), is(HttpStatus.UNPROCESSABLE_ENTITY.value()));
+    When:
+    {
+      doThrow(RecordNotFoundException.class).when(retrieveShortUrlStatistics).execute(anyString());
+
+      mvcResult =
+          mockMvc
+              .perform(get("/short-url/admin/statistics").param("shortUrl", shortUrl))
+              .andReturn();
+    }
+
+    Then:
+    {
+      assertThat(mvcResult.getResponse().getStatus(), is(HttpStatus.UNPROCESSABLE_ENTITY.value()));
+    }
   }
 }

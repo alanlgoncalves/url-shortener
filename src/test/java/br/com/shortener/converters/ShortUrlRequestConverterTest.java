@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
@@ -27,16 +27,25 @@ class ShortUrlRequestConverterTest {
 
   @Test
   void convertToShortUrlResponseJson() {
-    // GIVEN
-    ShortUrlRequest shortUrlRequest =
-        Fixture.from(ShortUrlRequest.class).gimme(Templates.SHORT_URL_REQUEST_1);
+      ShortUrlRequest shortUrlRequest;
 
-    // WHEN
-    ShortUrlRequestResponseJson shortUrlRequestResponseJson =
-        shortUrlRequestConverter.convertToShortUrlResponseJson(shortUrlRequest);
+      Given:
+      {
+          shortUrlRequest = Fixture.from(ShortUrlRequest.class).gimme(Templates.SHORT_URL_REQUEST_1);
+      }
 
-    // THEN
-    assertThat(shortUrlRequestResponseJson.getRequestDateTime())
-        .isEqualTo(shortUrlRequest.getRequestDateTime());
+      ShortUrlRequestResponseJson shortUrlRequestResponseJson;
+
+      When:
+      {
+          shortUrlRequestResponseJson =
+                  shortUrlRequestConverter.convertToShortUrlResponseJson(shortUrlRequest);
+      }
+
+      Then:
+      {
+          assertThat(shortUrlRequestResponseJson.getRequestDateTime())
+                  .isEqualTo(shortUrlRequest.getRequestDateTime());
+      }
   }
 }

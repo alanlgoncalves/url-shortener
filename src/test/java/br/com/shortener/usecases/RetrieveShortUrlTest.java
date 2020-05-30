@@ -33,29 +33,48 @@ public class RetrieveShortUrlTest {
 
   @Test
   public void retrieveWithFindShortUrl() {
-    // GIVEN
-    final String shortUrlId = "123456";
-    final ShortUrl shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
+    final String shortUrlId;
+    final ShortUrl shortUrl;
 
-    // WHEN
-    when(shortUrlGateway.get(eq(shortUrlId))).thenReturn(Optional.of(shortUrl));
-    ShortUrl returnedUrl = retrieveShortUrl.execute(shortUrlId);
+    Given:
+    {
+      shortUrlId = "123456";
+      shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
+    }
 
-    // THEN
-    verify(shortUrlGateway, times(1)).get(eq(shortUrlId));
-    assertThat(returnedUrl).isEqualTo(shortUrl);
+    final ShortUrl returnedUrl;
+
+    When:
+    {
+      when(shortUrlGateway.get(eq(shortUrlId))).thenReturn(Optional.of(shortUrl));
+      returnedUrl = retrieveShortUrl.execute(shortUrlId);
+    }
+
+    Then:
+    {
+      verify(shortUrlGateway, times(1)).get(eq(shortUrlId));
+      assertThat(returnedUrl).isEqualTo(shortUrl);
+    }
   }
 
   @Test(expected = RecordNotFoundException.class)
   public void retrieveWithNotFindShortUrl() {
-    // GIVEN
-    final String shortUrlId = "123456";
+    final String shortUrlId;
 
-    // WHEN
-    when(shortUrlGateway.get(eq(shortUrlId))).thenReturn(Optional.empty());
-    ShortUrl returnedUrl = retrieveShortUrl.execute(shortUrlId);
+    Given:
+    {
+      shortUrlId = "123456";
+    }
 
-    // THEN
-    verify(shortUrlGateway, times(1)).get(eq(shortUrlId));
+    When:
+    {
+      when(shortUrlGateway.get(eq(shortUrlId))).thenReturn(Optional.empty());
+      retrieveShortUrl.execute(shortUrlId);
+    }
+
+    Then:
+    {
+      verify(shortUrlGateway, times(1)).get(eq(shortUrlId));
+    }
   }
 }

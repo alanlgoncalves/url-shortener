@@ -19,7 +19,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @ExtendWith(SpringExtension.class)
 class ShortUrlConverterTest {
 
-  @Autowired private ShortUrlConverter shortUrlConverterl;
+  @Autowired private ShortUrlConverter shortUrlConverter;
 
   @BeforeEach
   public void setUp() {
@@ -28,26 +28,46 @@ class ShortUrlConverterTest {
 
   @Test
   void convertToShortUrlResponseJson() {
-    // GIVEN
-    final ShortUrl shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
+    final ShortUrl shortUrl;
 
-    // WHEN
-    ShortUrlResponseJson shortUrlResponseJson =
-        shortUrlConverterl.convertToShortUrlResponseJson("http", shortUrl);
+    Given:
+    {
+      shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
+    }
 
-    // THEN
-    assertThat(shortUrlResponseJson.getShortUrl()).isEqualTo(shortUrlResponseJson.getShortUrl());
+    final ShortUrlResponseJson shortUrlResponseJson;
+
+    When:
+    {
+      shortUrlResponseJson = shortUrlConverter.convertToShortUrlResponseJson("http", shortUrl);
+    }
+
+    Then:
+    {
+      assertThat(shortUrlResponseJson.getShortUrl()).isEqualTo(shortUrlResponseJson.getShortUrl());
+    }
   }
 
   @Test
   void convertToShortUrlJson() {
-    // GIVEN
-    final ShortUrl shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
 
-    // WHEN
-    ShortUrlJson shortUrlson = shortUrlConverterl.convertToShortUrlJson(shortUrl);
+    final ShortUrl shortUrl;
 
-    // THEN
-    assertThat(shortUrlson.getUrl()).isEqualTo(shortUrl.getUrl());
+    Given:
+    {
+      shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
+    }
+
+    final ShortUrlJson shortUrlJson;
+
+    When:
+    {
+      shortUrlJson = shortUrlConverter.convertToShortUrlJson(shortUrl);
+    }
+
+    Then:
+    {
+      assertThat(shortUrlJson.getUrl()).isEqualTo(shortUrl.getUrl());
+    }
   }
 }

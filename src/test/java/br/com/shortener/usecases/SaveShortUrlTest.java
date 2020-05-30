@@ -12,7 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -30,16 +30,27 @@ public class SaveShortUrlTest {
 
   @Test
   public void saveShortUrlWithSuccess() {
-    // GIVEN
-    final String url = "https://www.google.com.br";
-    final ShortUrl shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
+    final String url;
+    final ShortUrl shortUrl;
 
-    // WHEN
-    when(shortUrlGateway.save(any(ShortUrl.class))).thenReturn(shortUrl);
-    ShortUrl savedShortUrl = saveShortUrl.execute(url);
+    Given:
+    {
+      url = "https://www.google.com.br";
+      shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
+    }
 
-    // THEN
-    verify(shortUrlGateway, times(1)).save(any(ShortUrl.class));
-    assertThat(savedShortUrl.getUrl()).isEqualTo(url);
+    final ShortUrl savedShortUrl;
+
+    When:
+    {
+      when(shortUrlGateway.save(any(ShortUrl.class))).thenReturn(shortUrl);
+      savedShortUrl = saveShortUrl.execute(url);
+    }
+
+    Then:
+    {
+      verify(shortUrlGateway, times(1)).save(any(ShortUrl.class));
+      assertThat(savedShortUrl.getUrl()).isEqualTo(url);
+    }
   }
 }

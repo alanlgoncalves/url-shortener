@@ -40,68 +40,104 @@ public class RetrieveShortUrlStatisticsTest {
 
   @Test
   public void retrieveShortUrlStatisticsWithResults() {
-    // GIVEN
-    final String shortUrlId = "123456";
-    final ShortUrl shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
-    final long numberOfRequests = 10l;
-    final List<ShortUrlRequest> shortUrlRequestList =
-        Fixture.from(ShortUrlRequest.class).gimme(10, Templates.SHORT_URL_REQUEST_1);
+    final String shortUrlId;
+    final ShortUrl shortUrl;
+    final long numberOfRequests;
+    final List<ShortUrlRequest> shortUrlRequestList;
 
-    // WHEN
-    when(shortUrlGateway.get(eq(shortUrlId))).thenReturn(Optional.of(shortUrl));
-    when(shortUrlRequestGateway.countRequests(eq(shortUrlId))).thenReturn(numberOfRequests);
-    when(shortUrlRequestGateway.getLastTenRequests(eq(shortUrlId))).thenReturn(shortUrlRequestList);
+    Given:
+    {
+      shortUrlId = "123456";
+      shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
+      numberOfRequests = 10l;
+      shortUrlRequestList =
+          Fixture.from(ShortUrlRequest.class).gimme(10, Templates.SHORT_URL_REQUEST_1);
+    }
 
-    ShortUrlStatistics shortUrlStatistics = retrieveShortUrlStatistics.execute(shortUrlId);
+    final ShortUrlStatistics shortUrlStatistics;
 
-    // THEN
-    verify(shortUrlGateway, times(1)).get(eq(shortUrlId));
-    verify(shortUrlRequestGateway, times(1)).countRequests(eq(shortUrlId));
-    verify(shortUrlRequestGateway, times(1)).getLastTenRequests(eq(shortUrlId));
+    When:
+    {
+      when(shortUrlGateway.get(eq(shortUrlId))).thenReturn(Optional.of(shortUrl));
+      when(shortUrlRequestGateway.countRequests(eq(shortUrlId))).thenReturn(numberOfRequests);
+      when(shortUrlRequestGateway.getLastTenRequests(eq(shortUrlId)))
+          .thenReturn(shortUrlRequestList);
 
-    assertThat(shortUrlStatistics.getShortUrl()).isEqualTo(shortUrl);
-    assertThat(shortUrlStatistics.getLastTenRequests().size()).isEqualTo(numberOfRequests);
-    assertThat(shortUrlStatistics.getNumberOfRequests()).isEqualTo(numberOfRequests);
+      shortUrlStatistics = retrieveShortUrlStatistics.execute(shortUrlId);
+    }
+
+    Then:
+    {
+      verify(shortUrlGateway, times(1)).get(eq(shortUrlId));
+      verify(shortUrlRequestGateway, times(1)).countRequests(eq(shortUrlId));
+      verify(shortUrlRequestGateway, times(1)).getLastTenRequests(eq(shortUrlId));
+
+      assertThat(shortUrlStatistics.getShortUrl()).isEqualTo(shortUrl);
+      assertThat(shortUrlStatistics.getLastTenRequests().size()).isEqualTo(numberOfRequests);
+      assertThat(shortUrlStatistics.getNumberOfRequests()).isEqualTo(numberOfRequests);
+    }
   }
 
   @Test
   public void retrieveShortUrlStatisticsWithNonResults() {
-    // GIVEN
-    final String shortUrlId = "123456";
-    final ShortUrl shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
-    final long numberOfRequests = 0l;
-    final List<ShortUrlRequest> shortUrlRequestList = new ArrayList<>();
+    final String shortUrlId;
+    final ShortUrl shortUrl;
+    final long numberOfRequests;
+    final List<ShortUrlRequest> shortUrlRequestList;
 
-    // WHEN
-    when(shortUrlGateway.get(eq(shortUrlId))).thenReturn(Optional.of(shortUrl));
-    when(shortUrlRequestGateway.countRequests(eq(shortUrlId))).thenReturn(numberOfRequests);
-    when(shortUrlRequestGateway.getLastTenRequests(eq(shortUrlId))).thenReturn(shortUrlRequestList);
+    Given:
+    {
+      shortUrlId = "123456";
+      shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
+      numberOfRequests = 0l;
+      shortUrlRequestList = new ArrayList<>();
+    }
 
-    ShortUrlStatistics shortUrlStatistics = retrieveShortUrlStatistics.execute(shortUrlId);
+    final ShortUrlStatistics shortUrlStatistics;
 
-    // THEN
-    verify(shortUrlGateway, times(1)).get(eq(shortUrlId));
-    verify(shortUrlRequestGateway, times(1)).countRequests(eq(shortUrlId));
-    verify(shortUrlRequestGateway, times(1)).getLastTenRequests(eq(shortUrlId));
+    When:
+    {
+      when(shortUrlGateway.get(eq(shortUrlId))).thenReturn(Optional.of(shortUrl));
+      when(shortUrlRequestGateway.countRequests(eq(shortUrlId))).thenReturn(numberOfRequests);
+      when(shortUrlRequestGateway.getLastTenRequests(eq(shortUrlId)))
+          .thenReturn(shortUrlRequestList);
 
-    assertThat(shortUrlStatistics.getShortUrl()).isEqualTo(shortUrl);
-    assertThat(shortUrlStatistics.getLastTenRequests().size()).isEqualTo(numberOfRequests);
-    assertThat(shortUrlStatistics.getNumberOfRequests()).isEqualTo(numberOfRequests);
+      shortUrlStatistics = retrieveShortUrlStatistics.execute(shortUrlId);
+    }
+
+    Then:
+    {
+      verify(shortUrlGateway, times(1)).get(eq(shortUrlId));
+      verify(shortUrlRequestGateway, times(1)).countRequests(eq(shortUrlId));
+      verify(shortUrlRequestGateway, times(1)).getLastTenRequests(eq(shortUrlId));
+
+      assertThat(shortUrlStatistics.getShortUrl()).isEqualTo(shortUrl);
+      assertThat(shortUrlStatistics.getLastTenRequests().size()).isEqualTo(numberOfRequests);
+      assertThat(shortUrlStatistics.getNumberOfRequests()).isEqualTo(numberOfRequests);
+    }
   }
 
   @Test(expected = RecordNotFoundException.class)
   public void retrieveShortUrlStatisticsWithNotFoundShortUrl() {
-    // GIVEN
-    final String shortUrlId = "123456";
+    final String shortUrlId;
 
-    // WHEN
-    when(shortUrlGateway.get(eq(shortUrlId))).thenReturn(Optional.empty());
+    Given:
+    {
+      shortUrlId = "123456";
+    }
 
-    ShortUrlStatistics shortUrlStatistics = retrieveShortUrlStatistics.execute(shortUrlId);
+    When:
+    {
+      when(shortUrlGateway.get(eq(shortUrlId))).thenReturn(Optional.empty());
 
-    // THEN
-    verify(shortUrlGateway, times(1)).get(eq(shortUrlId));
-    verify(shortUrlRequestGateway, times(0)).countRequests(eq(shortUrlId));
-    verify(shortUrlRequestGateway, times(0)).getLastTenRequests(eq(shortUrlId));
+      retrieveShortUrlStatistics.execute(shortUrlId);
+    }
+
+    Then:
+    {
+      verify(shortUrlGateway, times(1)).get(eq(shortUrlId));
+      verify(shortUrlRequestGateway, times(0)).countRequests(eq(shortUrlId));
+      verify(shortUrlRequestGateway, times(0)).getLastTenRequests(eq(shortUrlId));
+    }
   }
 }

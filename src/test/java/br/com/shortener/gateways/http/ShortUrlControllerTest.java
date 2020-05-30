@@ -71,77 +71,127 @@ public class ShortUrlControllerTest {
 
   @Test
   public void redirectWithUsingRedirectPrefix() throws Exception {
-    // GIVEN
-    final String shortUrlId = "123456";
-    final ShortUrl shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
+    final String shortUrlId;
+    final ShortUrl shortUrl;
 
-    // WHEN
-    when(retrieveShortUrl.execute(anyString())).thenReturn(shortUrl);
-    final MvcResult mvcResult =
-        mockMvc.perform(get("/short-url/{shortUrlId}", shortUrlId)).andReturn();
+    Given:
+    {
+      shortUrlId = "123456";
+      shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
+    }
 
-    // THEN
-    verify(saveShortUrlRequest, times(1)).execute(any(ShortUrl.class), anyString());
-    assertThat(mvcResult.getResponse().getStatus(), is(HttpStatus.FOUND.value()));
+    final MvcResult mvcResult;
+
+    When:
+    {
+      when(retrieveShortUrl.execute(anyString())).thenReturn(shortUrl);
+
+      mvcResult = mockMvc.perform(get("/short-url/{shortUrlId}", shortUrlId)).andReturn();
+    }
+
+    Then:
+    {
+      verify(saveShortUrlRequest, times(1)).execute(any(ShortUrl.class), anyString());
+      assertThat(mvcResult.getResponse().getStatus(), is(HttpStatus.FOUND.value()));
+    }
   }
 
   @Test
   public void shortenURLWithValidUrl() throws Exception {
-    // GIVEN
-    final String serverContext = "http://127.0.0.1";
-    final ShortUrl shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
-    final ShortUrlResponseJson shortUrlResponseJson =
-        Fixture.from(ShortUrlResponseJson.class).gimme(Templates.SHORT_URL_RESPONSE_JSON);
-    final String bodyJson = "{\n" + "  \"url\": \"https://www.google.com.br\"\n" + "}";
+    final ShortUrl shortUrl;
+    final ShortUrlResponseJson shortUrlResponseJson;
+    final String bodyJson;
 
-    // WHEN
-    when(saveShortUrl.execute(anyString())).thenReturn(shortUrl);
-    when(shortUrlConverter.convertToShortUrlResponseJson(anyString(), any(ShortUrl.class)))
-        .thenReturn(shortUrlResponseJson);
+    Given:
+    {
+      shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
 
-    final MvcResult mvcResult =
-        mockMvc
-            .perform(
-                post("/short-url/create").contentType(MediaType.APPLICATION_JSON).content(bodyJson))
-            .andReturn();
+      shortUrlResponseJson =
+          Fixture.from(ShortUrlResponseJson.class).gimme(Templates.SHORT_URL_RESPONSE_JSON);
 
-    // THEN
-    assertThat(mvcResult.getResponse().getStatus(), is(HttpStatus.CREATED.value()));
-    assertThat(mvcResult.getResponse().getContentAsString(), hasJsonPath("$.shortUrl"));
-    assertThat(
-        mvcResult.getResponse().getContentAsString(),
-        hasJsonPath("$.shortUrl", equalToIgnoringCase(shortUrlResponseJson.getShortUrl())));
+      bodyJson = "{\n" + "  \"url\": \"https://www.google.com.br\"\n" + "}";
+    }
+
+    final MvcResult mvcResult;
+
+    When:
+    {
+      when(saveShortUrl.execute(anyString())).thenReturn(shortUrl);
+      when(shortUrlConverter.convertToShortUrlResponseJson(anyString(), any(ShortUrl.class)))
+          .thenReturn(shortUrlResponseJson);
+
+      mvcResult =
+          mockMvc
+              .perform(
+                  post("/short-url/create")
+                      .contentType(MediaType.APPLICATION_JSON)
+                      .content(bodyJson))
+              .andReturn();
+    }
+
+    Then:
+    {
+      assertThat(mvcResult.getResponse().getStatus(), is(HttpStatus.CREATED.value()));
+      assertThat(mvcResult.getResponse().getContentAsString(), hasJsonPath("$.shortUrl"));
+      assertThat(
+          mvcResult.getResponse().getContentAsString(),
+          hasJsonPath("$.shortUrl", equalToIgnoringCase(shortUrlResponseJson.getShortUrl())));
+    }
   }
 
   @Test
   public void shortenURLWithoutUrl() throws Exception {
-    // GIVEN
-    final String bodyJson = "{}";
+    final String bodyJson;
 
-    // WHEN
-    final MvcResult mvcResult =
-        mockMvc
-            .perform(
-                post("/short-url/create").contentType(MediaType.APPLICATION_JSON).content(bodyJson))
-            .andReturn();
+    Given:
+    {
+      bodyJson = "{}";
+    }
 
-    // THEN
-    assertThat(mvcResult.getResponse().getStatus(), is(HttpStatus.BAD_REQUEST.value()));
+    final MvcResult mvcResult;
+
+    When:
+    {
+      mvcResult =
+          mockMvc
+              .perform(
+                  post("/short-url/create")
+                      .contentType(MediaType.APPLICATION_JSON)
+                      .content(bodyJson))
+              .andReturn();
+    }
+
+    Then:
+    {
+      assertThat(mvcResult.getResponse().getStatus(), is(HttpStatus.BAD_REQUEST.value()));
+    }
   }
 
   @Test
   public void shortenURLWithInvalidUrl() throws Exception {
-    // GIVEN
-    final String bodyJson = "{\n" + "  \"url\": \"test\"\n" + "}";
+    final String bodyJson;
 
-    // WHEN
-    final MvcResult mvcResult =
-        mockMvc
-            .perform(
-                post("/short-url/create").contentType(MediaType.APPLICATION_JSON).content(bodyJson))
-            .andReturn();
+    Given:
+    {
+      bodyJson = "{\n" + "  \"url\": \"test\"\n" + "}";
+    }
 
-    // THEN
-    assertThat(mvcResult.getResponse().getStatus(), is(HttpStatus.BAD_REQUEST.value()));
+    final MvcResult mvcResult;
+
+    When:
+    {
+      mvcResult =
+          mockMvc
+              .perform(
+                  post("/short-url/create")
+                      .contentType(MediaType.APPLICATION_JSON)
+                      .content(bodyJson))
+              .andReturn();
+    }
+
+    Then:
+    {
+      assertThat(mvcResult.getResponse().getStatus(), is(HttpStatus.BAD_REQUEST.value()));
+    }
   }
 }

@@ -35,13 +35,23 @@ public class UserGatewayImplTest {
 
   @Test
   public void getByUsername() {
-    // GIVEN
-    final String username = this.user.getUsername();
+    final String username;
 
-    // WHEN
-    User user = userGateway.getByUsername(username);
+    Given:
+    {
+      username = this.user.getUsername();
+    }
 
-    // THEN
-    assertThat(user).isEqualTo(this.user);
+    final User user;
+
+    When:
+    {
+      user = userGateway.getByUsername(username);
+    }
+
+    Then:
+    {
+      assertThat(user).isEqualTo(this.user);
+    }
   }
 }

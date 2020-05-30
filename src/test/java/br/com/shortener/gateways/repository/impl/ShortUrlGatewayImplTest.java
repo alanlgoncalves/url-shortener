@@ -29,29 +29,49 @@ public class ShortUrlGatewayImplTest {
 
   @Test
   public void saveAndFindShortUrl() {
-    // GIVEN
-    final ShortUrl shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
+    final ShortUrl shortUrl;
 
-    // WHEN
-    ShortUrl saveShortUrl = shortUrlGateway.save(shortUrl);
+    Given:
+    {
+      shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
+    }
 
-    // THEN
-    assertThat(shortUrlGateway.get(saveShortUrl.getId()).isPresent()).isEqualTo(true);
-    assertThat(shortUrlGateway.get(saveShortUrl.getId()).get().getId())
-        .isEqualTo(saveShortUrl.getId());
-    assertThat(shortUrlGateway.get(saveShortUrl.getId()).get().getUrl())
-        .isEqualTo(saveShortUrl.getUrl());
+    final ShortUrl saveShortUrl;
+
+    When:
+    {
+      saveShortUrl = shortUrlGateway.save(shortUrl);
+    }
+
+    Then:
+    {
+      assertThat(shortUrlGateway.get(saveShortUrl.getId()).isPresent()).isEqualTo(true);
+      assertThat(shortUrlGateway.get(saveShortUrl.getId()).get().getId())
+          .isEqualTo(saveShortUrl.getId());
+      assertThat(shortUrlGateway.get(saveShortUrl.getId()).get().getUrl())
+          .isEqualTo(saveShortUrl.getUrl());
+    }
   }
 
   @Test
   public void searchInvalidShortUrl() {
-    // GIVEN
-    final String shortUrlId = "123456";
+    final String shortUrlId;
 
-    // WHEN
-    Optional<ShortUrl> shortUrlOptional = shortUrlGateway.get(shortUrlId);
+    Given:
+    {
+      shortUrlId = "123456";
+    }
 
-    // THEN
-    assertThat(shortUrlOptional.isPresent()).isEqualTo(false);
+    final Optional<ShortUrl> shortUrlOptional;
+
+    When:
+    {
+      shortUrlOptional = shortUrlGateway.get(shortUrlId);
+    }
+
+    Then:
+    {
+      assertThat(shortUrlOptional.isPresent()).isEqualTo(false);
+    }
   }
 }

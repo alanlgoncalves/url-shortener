@@ -33,31 +33,50 @@ public class RetrieveCustomDetailsTest {
 
   @Test
   public void loadUserByUsernameWithSuccess() {
-    // GIVEN
-    final String username = "user";
-    final User user = Fixture.from(User.class).gimme(Templates.USER);
+    final String username;
+    final User user;
 
-    // WHEN
-    when(userGateway.getByUsername(eq(username))).thenReturn(user);
-    CustomUser customUser = retrieveCustomDetails.loadUserByUsername(username);
+    Given:
+    {
+      username = "user";
+      user = Fixture.from(User.class).gimme(Templates.USER);
+    }
+
+    final CustomUser customUser;
+    When:
+    {
+      when(userGateway.getByUsername(eq(username))).thenReturn(user);
+      customUser = retrieveCustomDetails.loadUserByUsername(username);
+    }
 
     // THEN
-    verify(userGateway, times(1)).getByUsername(anyString());
-    assertThat(customUser.getUsername()).isEqualTo(user.getUsername());
-    assertThat(customUser.getPassword()).isEqualTo(user.getPassword());
-    assertThat(customUser.getAuthorities().size()).isEqualTo(user.getAuthorities().size());
+    Then:
+    {
+      verify(userGateway, times(1)).getByUsername(anyString());
+      assertThat(customUser.getUsername()).isEqualTo(user.getUsername());
+      assertThat(customUser.getPassword()).isEqualTo(user.getPassword());
+      assertThat(customUser.getAuthorities().size()).isEqualTo(user.getAuthorities().size());
+    }
   }
 
   @Test(expected = UsernameNotFoundException.class)
   public void loadUserByUsernameNotFound() {
-    // GIVEN
-    final String username = "user";
+    final String username;
 
-    // WHEN
-    when(userGateway.getByUsername(eq(username))).thenReturn(null);
-    retrieveCustomDetails.loadUserByUsername(username);
+    Given:
+    {
+      username = "user";
+    }
 
-    // THEN
-    verify(userGateway, times(1)).getByUsername(anyString());
+    When:
+    {
+      when(userGateway.getByUsername(eq(username))).thenReturn(null);
+      retrieveCustomDetails.loadUserByUsername(username);
+    }
+
+    Then:
+    {
+      verify(userGateway, times(1)).getByUsername(anyString());
+    }
   }
 }

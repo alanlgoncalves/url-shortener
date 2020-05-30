@@ -31,14 +31,23 @@ public class SaveShortUrlRequestTest {
 
   @Test
   public void saveShortUrlRequestWithSuccess() {
-    // GIVEN
-    final ShortUrl shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
-    final String requestIp = "127.0.0.1";
+    final ShortUrl shortUrl;
+    final String requestIp;
 
-    // WHEN
-    saveShortUrlRequest.execute(shortUrl, requestIp);
+    Given:
+    {
+      shortUrl = Fixture.from(ShortUrl.class).gimme(Templates.SHORT_URL);
+      requestIp = "127.0.0.1";
+    }
 
-    // THEN
-    verify(shortUrlRequestGateway, times(1)).save(any(ShortUrlRequest.class));
+    When:
+    {
+      saveShortUrlRequest.execute(shortUrl, requestIp);
+    }
+
+    Then:
+    {
+      verify(shortUrlRequestGateway, times(1)).save(any(ShortUrlRequest.class));
+    }
   }
 }
