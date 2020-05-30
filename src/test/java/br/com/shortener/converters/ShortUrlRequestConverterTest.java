@@ -27,25 +27,25 @@ class ShortUrlRequestConverterTest {
 
   @Test
   void convertToShortUrlResponseJson() {
-      ShortUrlRequest shortUrlRequest;
+    final ShortUrlRequest shortUrlRequest;
 
-      Given:
-      {
-          shortUrlRequest = Fixture.from(ShortUrlRequest.class).gimme(Templates.SHORT_URL_REQUEST_1);
-      }
+    Given:
+    {
+      shortUrlRequest = Fixture.from(ShortUrlRequest.class).gimme(Templates.SHORT_URL_REQUEST_1);
+    }
 
-      ShortUrlRequestResponseJson shortUrlRequestResponseJson;
+    final ShortUrlRequestResponseJson shortUrlRequestResponseJson;
 
-      When:
-      {
-          shortUrlRequestResponseJson =
-                  shortUrlRequestConverter.convertToShortUrlResponseJson(shortUrlRequest);
-      }
+    When:
+    {
+      shortUrlRequestResponseJson =
+          shortUrlRequestConverter.convertToShortUrlResponseJson(shortUrlRequest);
+    }
 
-      Then:
-      {
-          assertThat(shortUrlRequestResponseJson.getRequestDateTime())
-                  .isEqualTo(shortUrlRequest.getRequestDateTime());
-      }
+    Then:
+    {
+      assertThat(shortUrlRequestResponseJson.getRequestDateTime())
+          .isEqualTo(shortUrlRequest.getRequestDateTime());
+    }
   }
 }
